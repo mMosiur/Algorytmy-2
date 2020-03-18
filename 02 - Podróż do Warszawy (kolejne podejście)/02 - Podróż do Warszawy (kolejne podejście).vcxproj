@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{13F60CCD-D1E1-4D74-8938-5159CE8895B6}</ProjectGuid>
-    <RootNamespace>My01PodróżdoWarszawy</RootNamespace>
+    <ProjectGuid>{C2DFEDAC-E155-4A12-B27A-8ABB2CB08BF2}</ProjectGuid>
+    <RootNamespace>My02PodróżdoWarszawykolejnepodejście</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -138,10 +138,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Podróż do Warszawy.cpp" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
+    <ClCompile Include="Podróż do Warszawy (kolejne podejście).cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
