@@ -27,7 +27,7 @@ public:
     }
 
     // Funkcja zwracaj¹ca wskaŸnik na rodzica elementu o id podanym w argumencie
-    Element* find(uint id) {
+    Element* find_root(uint id) {
         while(sets[id].parent_id != id) {
             id = sets[id].parent_id;
         }
@@ -37,8 +37,8 @@ public:
     // Funkcja wykonuj¹ca uniê dwóch elementów o podanych id
     // Zwraca true jeœli elementy s¹ ju¿ w tym samym drzewie i false, jeœli wykonana zosta³a unia
     bool union_roots(uint x, uint y) {
-        Element* x_root = find(x);
-        Element* y_root = find(y);
+        Element* x_root = find_root(x);
+        Element* y_root = find_root(y);
         if(x_root == y_root) return true;
         if(x_root->subtree_size < y_root->subtree_size) { // y wiêksze od x
             x_root->parent_id = y_root->id;
@@ -72,11 +72,11 @@ public:
             }
         }
         for(const auto& interest_group : interest_groups) {
-            auto it2 = interest_group.second.begin();
-            auto it1 = it2++;
-            while(it2 != interest_group.second.end()) {
-                edges.emplace_back((*it1), (*it2));
-                it1 = it2++;
+            for(auto it1 = interest_group.second.begin(); it1 != interest_group.second.end(); ++it1) {
+                for(auto it2 = it1; it2 != interest_group.second.end(); ++it2) {
+                    if(it1 == it2) continue;
+                    edges.emplace_back((*it1), (*it2));
+                }
             }
         }
     }
