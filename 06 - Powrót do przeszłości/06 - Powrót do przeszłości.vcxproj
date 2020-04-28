@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{5FA41F76-F10E-4137-B637-81FCA816CB99}</ProjectGuid>
-    <RootNamespace>My05Festiwalsmaku</RootNamespace>
+    <ProjectGuid>{6B4273C9-A825-4E52-A223-F9FFE44E075B}</ProjectGuid>
+    <RootNamespace>My06Powrótdoprzeszłości</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -138,10 +138,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Festiwal smaku.cpp" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
+    <ClCompile Include="Powrót do przeszłości.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
