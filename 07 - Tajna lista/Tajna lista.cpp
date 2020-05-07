@@ -3,21 +3,21 @@
 typedef unsigned short ushort;
 typedef unsigned int uint;
 
-// Klasa drzewa czerwono-czarnego
-class RBTree {
-
-    // Struktura wêz³a w drzewie czerwono czarnym
-    struct Node {
+// Klasa drzewa czerwono-czarnego z wbudowan¹ list¹
+class RedBlackListTree {
+    // Struktura wêz³a w drzewie czerwono czarnym z wbudowanym wêz³em listy
+    struct RedBlackListTreeNode {
         enum class Color { RED, BLACK }; // Enum koloru wêz³a
         std::string key; // Klucz wêz³a
-        uint value; // Wartoœæ wêz³a
         Color color; // Kolor wêz³a
-        Node* parent; // WskaŸnik na rodzica wêz³a
-        Node* left; // WskaŸnik na lewe dziecko wêz³a
-        Node* right; // WskaŸnik na prawe dziecko wêz³a
+        RedBlackListTreeNode* parent; // WskaŸnik na rodzica wêz³a
+        RedBlackListTreeNode* left; // WskaŸnik na lewe dziecko wêz³a
+        RedBlackListTreeNode* right; // WskaŸnik na prawe dziecko wêz³a
+        RedBlackListTreeNode* prev; // WskaŸnik na poprzedni element listy
+        RedBlackListTreeNode* next; // WskaŸnik na nastêpny element listy
 
         // Konstruktor przyjmuj¹cy klucz i wartoœæ wêz³a oraz inicjalizuj¹cy zmienne w wêŸle
-        Node(std::string key, uint value) : key(key), value(value), color(Node::Color::RED), parent(nullptr), left(nullptr), right(nullptr) {}
+        RedBlackListTreeNode(std::string key) : key(key), color(RedBlackListTreeNode::Color::RED), parent(nullptr), left(nullptr), right(nullptr), prev(nullptr), next(nullptr) {}
 
         // Funkcja zwracaj¹ca, czy wêze³ jest lewym dzieckiem (false gdy nie ma rodzica)
         bool is_left() {
@@ -32,14 +32,14 @@ class RBTree {
         }
 
         // Funkcja zwracaj¹ca wskaŸnik na brata tego wêz³a (nullptr gdy nie ma brata)
-        Node* brother() {
+        RedBlackListTreeNode* brother() {
             if(!parent) return nullptr;
             if(is_left()) return parent->right;
             return parent->left;
         }
         
         // Funkcja dodaj¹ca dziecko do tego wêz³a, lub do jednego z dzieci tego wêz³a
-        void add_child(Node*& node) {
+        void add_child(RedBlackListTreeNode*& node) {
             if(node->key < key) { // Klucz mniejszy od tego wêz³a
                 if(left) left->add_child(node);
                 else {
@@ -55,9 +55,11 @@ class RBTree {
             }
         }
     };
+    typedef RedBlackListTreeNode Node;
 
-    Node* root; // WskaŸnik na korzeñ drzewa
-    uint nof_elements; // Iloœæ elementów w drzewie
+    Node* tree_root; // WskaŸnik na korzeñ drzewa
+    Node* list_first; // WskaŸnik na pierwszy element listy
+    Node* list_last; // WskaŸnik na ostatni element listy
 
     // Funkcja wykonuj¹ca rotacjê w lewo danego wêz³a
     void rotate_left(Node*& node) {
@@ -70,7 +72,7 @@ class RBTree {
         } else if(node->is_left()) {
             node->parent->left = pivot;
         } else { // node->parent == nullptr
-            root = pivot;
+            tree_root = pivot;
         }
         pivot->left = node;
         node->parent = pivot;
@@ -87,22 +89,15 @@ class RBTree {
         } else if(node->is_right()) {
             node->parent->right = pivot;
         } else { // node->parent == nullptr
-            root = pivot;
+            tree_root = pivot;
         }
         pivot->right = node;
         node->parent = pivot;
     }
 
-    // Funkcja dodaj¹ca do listy z pierwszego argumentu podany wêze³ i tworzone przez niego poddrzewo
-    void add_to_list(std::string*& list, Node*& node) {
-        list[node->value] = node->key;
-        if(node->left) add_to_list(list, node->left);
-        if(node->right) add_to_list(list, node->right);
-    }
-
     // Funkcja zwracaj¹ca wskaŸnik na wêze³ o podanym kluczu (nullptr gdy nie znaleziono)
     Node* find(std::string key) {
-        Node* pos = root;
+        Node* pos = tree_root;
         while(pos && pos->key != key) {
             if(key < pos->key) pos = pos->left;
             else pos = pos->right;
@@ -110,113 +105,147 @@ class RBTree {
         return pos;
     }
 
-    // Funkcja usuwaj¹ca poddrzewo o korzeniu w podanym wêŸle
-    void delete_subtree(Node*& node) {
-        if(node->left) delete_subtree(node->left);
-        if(node->right) delete_subtree(node->right);
-        delete node;
-    }
-
-    // Funkcja inkrementuj¹ca wartoœci wszystkich wêz³ów w poddrzewie o podanym korzeniu
-    void increment_subtree_if_value_between(Node* node, const uint lower, const uint upper) {
-        if(lower <= node->value && node->value <= upper) node->value++;
-        if(node->left) increment_subtree_if_value_between(node->left, lower, upper);
-        if(node->right) increment_subtree_if_value_between(node->right, lower, upper);
-    }
-
-    void decrement_subtree_if_value_between(Node* node, const uint lower, const uint upper) {
-        if(lower <= node->value && node->value <= upper) node->value--;
-        if(node->left) decrement_subtree_if_value_between(node->left, lower, upper);
-        if(node->right) decrement_subtree_if_value_between(node->right, lower, upper);
-    }
-
 public:
-    RBTree() : root(nullptr), nof_elements(0) {}
-    ~RBTree() { if(root) delete_subtree(root); }
-
-    uint size() {
-        return nof_elements;
+    RedBlackListTree() : tree_root(nullptr), list_first(nullptr), list_last(nullptr) {}
+    ~RedBlackListTree() {
+        Node* pos = list_first;
+        while(pos){
+            Node* next = pos->next;
+            delete pos;
+            pos = next;
+        }
     }
 
-    void insert(std::string key, uint value) {
-        Node* node = new Node(key, value);
-        if(root == nullptr) {
-            root = node;
-            root->color = Node::Color::BLACK;
+    // Operacja wstawienia wêz³a o podanym kluczu do drzewa
+    void insert(std::string key) {
+        Node* node = new Node(key);
+        if(tree_root == nullptr) {
+            // Lista
+            list_first = node;
+            list_last = node;
+            // Drzewo
+            tree_root = node;
+            tree_root->color = Node::Color::BLACK;
         } else {
-            root->add_child(node);
-            while(node != root && node->parent->color != Node::Color::BLACK) {
+            // Lista
+            list_last->next = node;
+            node->prev = list_last;
+            list_last = node;
+            // Drzewo
+            tree_root->add_child(node);
+            while(node != tree_root && node->parent->color != Node::Color::BLACK) {
                 Node* parent = node->parent;
                 Node* grandparent = parent->parent;
                 Node* uncle = parent->brother();
-                if(uncle && uncle->color == Node::Color::RED) { // Uncle is RED
+                if(uncle && uncle->color == Node::Color::RED) { // Wujek jest Czerwony
                     parent->color = Node::Color::BLACK;
                     uncle->color = Node::Color::BLACK;
                     grandparent->color = Node::Color::RED;
                     node = grandparent;
-                } else { // Uncle is BLACK
-                    if(parent->is_left()) { // Parent is a LEFT child
+                } else { // Wujek jest Czarny
+                    if(parent->is_left()) { // Rodzic jest lewym dzieckiem
                         if(node->is_right()) rotate_left(parent);
                         rotate_right(grandparent);
-                    } else { // Parent is a RIGHT child
+                    } else { // Rodzic jest prawym dzieckiem
                         if(node->is_left()) rotate_right(parent);
                         rotate_left(grandparent);
                     }
                     std::swap(grandparent->color, grandparent->parent->color);
                 }
             }
-            root->color = Node::Color::BLACK;
+            tree_root->color = Node::Color::BLACK;
         }
-        nof_elements++;
     }
 
-    void swap_values(std::string key1, std::string key2) {
+    // Operacja zamieniaj¹ca pozycjami wêz³y o podanych kluczach w liœcie
+    void swap_nodes_in_list(std::string key1, std::string key2) {
         Node* node1 = find(key1);
         Node* node2 = find(key2);
-        std::swap(node1->value, node2->value);
+        if(node1 == node2->next || node2 == node1->next) { // Wêz³y s¹ s¹siaduj¹ce
+            Node* first = (node1 == node2->next ? node2 : node1);
+            Node* second = (node1 == node2->next ? node1 : node2);
+            second->prev = first->prev;
+            first->prev = second;
+            first->next = second->next;
+            second->next = first;
+        } else { // Wêz³y nie s¹ s¹siaduj¹ce
+            std::swap(node1->next, node2->next);
+            std::swap(node1->prev, node2->prev);
+        }
+        if(node1->prev) node1->prev->next = node1;
+        else list_first = node1;
+        if(node1->next) node1->next->prev = node1;
+        else list_last = node1;
+        if(node2->prev) node2->prev->next = node2;
+        else list_first = node2;
+        if(node2->next) node2->next->prev = node2;
+        else list_last = node2;
     }
 
+    // Przesuwa wêze³ o podanym kluczu o podan¹ liczbê miejsc (ujemne w lewo, dodatnie w prawo)
     void move_key_by(std::string key, int offset) {
         Node* node = find(key);
-        uint lower, upper;
+        Node* new_next_node = node;
+        // Znalezienie wêz³a, który bêdzie nowym nastêpcom przesuwanego wêz³a (nullptr oznacza, ¿e przesuwamy na koniec)
         if(offset < 0) {
-            upper = node->value - 1;
-            lower = node->value + offset;
-            increment_subtree_if_value_between(root, lower, upper);
+            offset = -offset;
+            for(ushort i = 0; i < offset; i++) new_next_node = new_next_node->prev;
         } else {
-            lower = node->value + 1;
-            upper = node->value + offset;
-            decrement_subtree_if_value_between(root, lower, upper);
+            new_next_node = new_next_node->next;
+            for(ushort i = 0; i < offset; i++) new_next_node = new_next_node->next;
         }
-        node->value += offset;
+        // Wypinamy przesuwany wêze³ z listy
+        if(node->prev) node->prev->next = node->next;
+        else list_first = node->next;
+        if(node->next) node->next->prev = node->prev;
+        else if(node->prev) list_last = node->prev;
+        else throw;
+        // Wpinamy przesuwany wêze³ w odpowiednie miejsce
+        if(new_next_node == nullptr) { // Wpinamy na koniec
+            list_last->next = node;
+            node->prev = list_last;
+            list_last = node;
+        } else { // Wpinamy przed nowy nastêpny wêze³
+            node->next = new_next_node;
+            node->prev = new_next_node->prev;
+            if(new_next_node->prev) new_next_node->prev->next = node;
+            else list_first = node;
+            new_next_node->prev = node;
+        }
     }
 
-    void print() {
-        std::string* list = new std::string[nof_elements];
-        add_to_list(list, root);
-        for(uint i = 0; i < nof_elements; i++) {
-            std::cout << list[i] << std::endl;
+    // Wypisujemy listê
+    void print() const {
+        Node* pos = list_first;
+        while(pos) {
+            std::cout << pos->key << std::endl;
+            pos = pos->next;
         }
     }
 };
 
+// Klasa listy osób 
 class List {
-    RBTree tree;
+    RedBlackListTree tree; // Drzewo czerwono czarne z wbudowan¹ list¹
 
-    void add(std::string name) { // Komenda 'a'
-        tree.insert(name, tree.size());
+    // Funkcja wykonuj¹ca komendê 'a' - dodaj¹ca do drzewa osobê o podanym pseudonimie
+    void add(std::string name) {
+        tree.insert(name);
     }
 
-    void move(std::string name, int offset) { // Komenda 'm'
+    // Funkcja wykonuj¹ca komendê 'm' - przesuwaj¹ca osobê o podanym pseudonimie o dan¹ liczbê miejsc
+    void move(std::string name, int offset) {
         tree.move_key_by(name, -offset);
     }
 
-    void swap(std::string name1, std::string name2) { // Komenda 'r'
-        tree.swap_values(name1, name2);
+    // Funkcja wykonuj¹ca komendê 'r' - zamieniaj¹ca osoby o podanych pseudonimach miejscami w liœcie
+    void swap(std::string name1, std::string name2) {
+        tree.swap_nodes_in_list(name1, name2);
     }
 
 public:
 
+    // Konstruktor przujmyj¹cy liczbê osób i wczytuj¹cy ich pseudonimy do drzewa
     List(ushort nof_people) {
         for(ushort i = 0; i < nof_people; i++) {
             std::string name;
@@ -225,6 +254,7 @@ public:
         }
     }
 
+    // Funkcja przyjmuj¹ca liczbê operacji do wykonania, nastêpnie wczytujaca dane tych operacji i wykonuj¹ca je
     void execute_operations(ushort nof_operations) {
         for(ushort i = 0; i < nof_operations; i++) {
             char operation;
@@ -254,6 +284,7 @@ public:
         }
     }
 
+    // Funkcja wypisuj¹ca listê
     void print() {
         tree.print();
     }
