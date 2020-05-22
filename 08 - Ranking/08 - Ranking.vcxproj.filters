@@ -18,8 +18,8 @@
     <ClCompile Include="Ranking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="geeks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
