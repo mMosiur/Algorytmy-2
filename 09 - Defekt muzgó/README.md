@@ -1,56 +1,56 @@
-# Defekt muzgó
-Partycja ma ju¿ doœæ tego roku. Wydawa³oby siê, ¿e kosmiczna katastrofa mog¹ca oznaczaæ koniec ¿ycia na ziemi to wystarczaj¹cy powód by uznaæ rok za nie najlepszy. A tu do tego dosz³y po¿ary, pandemia i id¹ca za tym kwarantanna. Partycja siedz¹c w domu z nudów zaczê³a s³uchaæ starych kaset (dobrze, ¿e magnetofonu nie wyrzuci³a na œmieci) i przypomnia³a jej siê jej buntownicza m³odoœæ, Ach gdyby zamiast chodziæ na punkowe koncerty uczy³a siê przed matur¹ matematyki. Skoñczy³aby informtykê i ¿y³a teraz jak królowa.
+# Defekt muzgÃ³
 
-Partycja szybko przypomnia³a sobie, ¿e to wszystko nie ma znaczenia, bo prawdopodobnie nie do¿yje pocz¹tku paŸdziernika. ,,No future'' pomyœla³a sobie i siêgnê³a po kasetê The Exploited. A potem przypomnia³ siê jej jeden z jej ulubionych punkowych numerów.
+Partycja ma juÅ¼ doÅ›Ä‡ tego roku. WydawaÅ‚oby siÄ™, Å¼e kosmiczna katastrofa mogÄ…ca oznaczaÄ‡ koniec Å¼ycia na ziemi to wystarczajÄ…cy powÃ³d by uznaÄ‡ rok za nie najlepszy. A tu do tego doszÅ‚y poÅ¼ary, pandemia i idÄ…ca za tym kwarantanna. Partycja siedzÄ…c w domu z nudÃ³w zaczÄ™Å‚a sÅ‚uchaÄ‡ starych kaset (dobrze, Å¼e magnetofonu nie wyrzuciÅ‚a na Å›mieci) i przypomniaÅ‚a jej siÄ™ jej buntownicza mÅ‚odoÅ›Ä‡, Ach gdyby zamiast chodziÄ‡ na punkowe koncerty uczyÅ‚a siÄ™ przed maturÄ… matematyki. SkoÅ„czyÅ‚aby informtykÄ™ i Å¼yÅ‚a teraz jak krÃ³lowa.
 
-,,Wszyscy jedziemy na tym samym wózku,
-od strachu ratuje nas tylko defekt mózgu''.
+Partycja szybko przypomniaÅ‚a sobie, Å¼e to wszystko nie ma znaczenia, bo prawdopodobnie nie doÅ¼yje poczÄ…tku paÅºdziernika. ,,No future'' pomyÅ›laÅ‚a sobie i siÄ™gnÄ™Å‚a po kasetÄ™ The Exploited. A potem przypomniaÅ‚ siÄ™ jej jeden z jej ulubionych punkowych numerÃ³w.
 
-nuci³a Partycja hit Defektu muzgó, ale przypomnia³a sobie, ¿e jednak nie wszyscy jad¹ na tym samym wózku, bo wózki niektórych s¹ nieco wygodniejsze.  To jeszcze bardziej popsu³o Partycji nastrój. Jednak, jako ¿e w ci¹gu ostatnich kilku miesiêcy Partycja przywyk³a do porz¹dkowania wszystkiego, postanowi³a  zrobiæ porz¹dek ze swoimi kasetami, ¿eby w razie potrzeby bez problemu odnaleŸæ ukochan¹ p³ytê.
+_,,Wszyscy jedziemy na tym samym wÃ³zku,<br>
+od strachu ratuje nas tylko defekt mÃ³zgu''._
 
-## Wejœcie:
+nuciÅ‚a Partycja hit Defektu muzgÃ³, ale przypomniaÅ‚a sobie, Å¼e jednak nie wszyscy jadÄ… na tym samym wÃ³zku, bo wÃ³zki niektÃ³rych sÄ… nieco wygodniejsze. To jeszcze bardziej popsuÅ‚o Partycji nastrÃ³j. Jednak, jako Å¼e w ciÄ…gu ostatnich kilku miesiÄ™cy Partycja przywykÅ‚a do porzÄ…dkowania wszystkiego, postanowiÅ‚a zrobiÄ‡ porzÄ…dek ze swoimi kasetami, Å¼eby w razie potrzeby bez problemu odnaleÅºÄ‡ ukochanÄ… pÅ‚ytÄ™.
 
-W pierwszej linii wejœcia program otrzymuje liczbê **n** oznaczaj¹c¹ liczbê operacji na bazie kaset a nastêpnie n opisów operacji z poni¿szej listy
+## WejÅ›cie:
+W pierwszej linii wejÅ›cia program otrzymuje liczbÄ™ **n** oznaczajÄ…cÄ… liczbÄ™ operacji na bazie kaset a nastÄ™pnie n opisÃ³w operacji z poniÅ¼szej listy
 
-**d** – dodanie do bazy nowej kasety, w przypadku tej operacji w kolejnych dwóch liniach znajdowa³a siê bêdzie nazwa zespo³u i tytu³ kasety.
-**w** – wypisanie w osobnych liniach tytu³ów kaset podanego zespo³u. Nazwa zespo³u zostanie podana w kolejnej linii wejœcia. Zespo³u nale¿y wypisywaæ w kolejnoœci ich dodawania do bazy.
-**z**– wypisanie w osobnych liniach zespo³ów, które nagra³y kasetê o  podanym tytule. Nazwa zespo³u zostanie podana w kolejnej linii. Nazwy zespo³ów nale¿y wypisywaæ w kolejnoœci dodawania kaset o podanym tytule do bazy.
+* **d** â€“ dodanie do bazy nowej kasety, w przypadku tej operacji w kolejnych dwÃ³ch liniach znajdowaÅ‚a siÄ™ bÄ™dzie nazwa zespoÅ‚u i tytuÅ‚ kasety.
+* **w** â€“ wypisanie w osobnych liniach tytuÅ‚Ã³w kaset podanego zespoÅ‚u. Nazwa zespoÅ‚u zostanie podana w kolejnej linii wejÅ›cia. ZespoÅ‚u naleÅ¼y wypisywaÄ‡ w kolejnoÅ›ci ich dodawania do bazy.
+* **z** â€“ wypisanie w osobnych liniach zespoÅ‚Ã³w, ktÃ³re nagraÅ‚y kasetÄ™ o podanym tytule. Nazwa zespoÅ‚u zostanie podana w kolejnej linii. Nazwy zespoÅ‚Ã³w naleÅ¼y wypisywaÄ‡ w kolejnoÅ›ci dodawania kaset o podanym tytule do bazy.
 
+**UWAGA: w zestawach mogÄ… pojawiÄ‡ siÄ™ linie, ktÃ³re nie pasujÄ… do powyÅ¼szego wzorca (zamiast jednoznakowego symbolu polecenia mogÄ… pojawiÄ‡ siÄ™ dÅ‚uÅ¼sze linie). Takie linie program powinien ignorowaÄ‡.**
 ```
 1<=n<=100000
 ```
 
-## Wyjœcie:
+## WyjÅ›cie:
+Na standardowym wyjÅ›ciu program powinien wypisaÄ‡ efekty dziaÅ‚ania operacji **w** i **z**. W przypadku gdy w bazie nie ma zespoÅ‚u o podanej nazwie (operacja **w**) lub kasety o podanym tytule (operacja **z**) program nie powinien niczego wypisaÄ‡.
 
-Na standardowym wyjœciu program powinien wypisaæ efekty dzia³ania operacji **w** i **z**. W przypadku gdy w bazie nie ma zespo³u o podanej nazwie (operacja **w**) lub kasety o podanym tytule (operacja **z**) program nie powinien niczego wypisaæ.
-
-## Przyk³adowe wejœcie:
+### PrzykÅ‚adowe wejÅ›cie:
 ```
 5
 d
-Defekt muzgó
+Defekt muzgÃ³
 Wszyscy jedziemy...
 d
-Zielone ¿abki
+Zielone Å¼abki
 Lekcja historii
 d
-Defekt muzgó
+Defekt muzgÃ³
 Lekcja historii
-w 
-Defekt muzgó
+w
+Defekt muzgÃ³
 z
 Lekcja historii
 z
 Wszyscy pokutujemy
 ```
 
-## Przyk³adowe wyjœcie:
+### PrzykÅ‚adowe wyjÅ›cie:
 ```
 Wszyscy jedziemy...
 Lekcja historii
-Zielone ¿abki
-Defekt muzgó
+Zielone Å¼abki
+Defekt muzgÃ³
 ```
 
 ## Uwaga:
-**Zadanie ma zostaæ rozwi¹zane przy pomocy samodzielnie zaimplementowanych drzew splay.**
+**Zadanie ma zostaÄ‡ rozwiÄ…zane przy pomocy samodzielnie zaimplementowanych drzew splay.**
