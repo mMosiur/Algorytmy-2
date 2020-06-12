@@ -53,7 +53,7 @@ class CompressedTrie {
 				ushort matched = match(it->first, name.substr(pos_in_name));
 				if(matched == 0) continue;
 				if(matched == it->first.length()) {
-					if(pos_in_name + matched == name.length()) {
+					if((size_t)pos_in_name + matched == name.length()) {
 						// Jest to końcówka
 						if(it->second->key == nullptr) it->second->key = new T(name);
 						return it->second->key;
