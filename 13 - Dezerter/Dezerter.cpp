@@ -4,34 +4,28 @@
 
 typedef unsigned int uint;
 
+// Struktora reprezentująca znak w tekście wraz z dodaktowymi parametrami
 struct Character {
-	char ascii;
-	uint hash;
-	std::pair<uint, uint> pair;
-	uint initial_position;
+	char ascii; // Znak ascii
+	uint hash; // Hash dla podciągu o początku w tym znaku
+	std::pair<uint, uint> pair; // Para haszy dla tego i kolejnego do podłączenia podciągu
+	uint position; // Początkowa pozycja w tekście
 
-	Character(uint initial_position, char character)
-		: initial_position(initial_position),
-		ascii(character),
-		hash(0) {}
+	// Konstruktor przyjmujący i inicjalizujący wymagane zmienne
+	Character(uint position, char character) : position(position), ascii(character), hash(0) {}
 };
 
+// Klasa reprezentująca tekst do przetworzenia
 class Text {
-public:
-	enum class Sort {
-		Position,
-		Ascii,
-		Pair,
-		Hash
-	};
-private:
-	std::vector<Character*> text;
-	Sort last_sort;
-	uint last_max_hash;
+
+	std::vector<Character> text; // Wektor znaków reprezentujący otrzymany tekst
+	uint last_max_hash; // Najwyższy hash, jaki pojawił się w poprzednim hashowaniu
+
+	// Funkcja sortująca liniowo znaki względem ich wartości ascii (bucket sort)
 	void sort_by_ascii() {
-		std::array<std::vector<Character*>, 256> buckets;
+		std::array<std::vector<Character>, 256> buckets;
 		for(auto& character : text)
-			buckets[character->ascii].push_back(character);
+			buckets[character.ascii].push_back(character);
 		uint pos = 0;
 		for(auto& bucket : buckets) {
 			for(auto& character : bucket) {
@@ -39,17 +33,21 @@ private:
 			}
 		}
 	}
+
+	// Funkcja sortująca liniowo znaki pod względem ich pozycji w tekście (ustawia tekst z powrotem do jego pierwotnej formy)
 	void sort_by_position() {
-		std::vector<Character*> new_text(text.size());
+		std::vector<Character> new_text(text.size(), Character(0, 0));
 		for(auto& ascii : text) {
-			new_text[ascii->initial_position] = ascii;
+			new_text[ascii.position] = ascii;
 		}
 		text = new_text;
 	}
+
+	// Funkcja sortująca liniowo znaki względem ich pary wewnątrz (radix sort)
 	void sort_by_pairs() {
-		std::vector<std::vector<Character*>> buckets(last_max_hash+1);
+		std::vector<std::vector<Character>> buckets(last_max_hash+1);
 		for(auto& character : text) {
-			buckets[character->pair.second].push_back(character);
+			buckets[character.pair.second].push_back(character);
 		}
 		uint pos = 0;
 		for(auto& bucket : buckets) {
@@ -59,7 +57,7 @@ private:
 			bucket.clear();
 		}
 		for(auto& character : text) {
-			buckets[character->pair.first].push_back(character);
+			buckets[character.pair.first].push_back(character);
 		}
 		pos = 0;
 		for(auto& bucket : buckets) {
@@ -68,10 +66,12 @@ private:
 			}
 		}
 	}
+
+	// Funkcja sortująca liniowo znaki na bazie ich aktualnego hashu (bucket sort)
 	void sort_by_hash() {
-		std::vector<std::vector<Character*>> buckets(last_max_hash + 1);
+		std::vector<std::vector<Character>> buckets(last_max_hash + 1);
 		for(auto& character : text) {
-			buckets[character->hash].push_back(character);
+			buckets[character.hash].push_back(character);
 		}
 		uint pos = 0;
 		for(auto& bucket : buckets) {
@@ -80,68 +80,50 @@ private:
 			}
 		}
 	}
+
 public:
-	Text(std::string str) : text(str.length()), last_sort(Sort::Position), last_max_hash(0) {
+
+	// Konstruktor przyjmujący string do przetworzenia i wczytujący go do formy struktur znaków
+	Text(std::string str) : last_max_hash(0) {
 		for(uint i = 0; i < str.length(); i++) {
-			text[i] = new Character(i, str[i]);
+			text.push_back(Character(i, str[i]));
 		}
 	}
-	std::vector<Character*>::const_iterator begin() const {
-		return text.begin();
-	}
-	std::vector<Character*>::const_iterator end() const {
-		return text.end();
-	}
-	bool sort_by(Sort sort_type) {
-		if(sort_type == last_sort) return true;
-		switch(sort_type) {
-		case Sort::Position:
-			sort_by_position();
-			break;
-		case Sort::Ascii:
-			sort_by_ascii();
-			break;
-		case Sort::Pair:
-			sort_by_pairs();
-			break;
-		case Sort::Hash:
-			sort_by_hash();
-			break;
-		default:
-			return false;
-		}
-		last_sort = sort_type;
-		return true;
-	}
+	
+	// Funkcja sortująca przez pozycję i budująca dla znaków ich nowe pary dla podanego dystansu między znakami
 	void construct_new_pairs(uint distance) {
-		sort_by(Text::Sort::Position);
+		sort_by_position();
 		for(uint i = 0; i < text.size(); i++) {
-			uint other_hash = (i + distance >= text.size() ? 0 : text[i + distance]->hash);
-			text[i]->pair = std::make_pair(text[i]->hash, other_hash);
+			uint other_hash = (i + distance >= text.size() ? 0 : text[i + distance].hash);
+			text[i].pair = std::make_pair(text[i].hash, other_hash);
 		}
 	}
+
+	// Funkcja sortująca przez pary i generująca dla znaków nowe hashe
 	void generate_hashes() {
-		sort_by(Text::Sort::Pair);
+		sort_by_pairs();
 		std::pair<uint, uint> prev_pair = { 0, 0 };
 		last_max_hash = 0;
 		for(auto& character : text) {
-			if(character->pair != prev_pair) {
-				character->hash = ++last_max_hash;
-				prev_pair = character->pair;
-			} else character->hash = last_max_hash;
+			if(character.pair != prev_pair) {
+				character.hash = ++last_max_hash;
+				prev_pair = character.pair;
+			} else character.hash = last_max_hash;
 		}
 	}
+
+	// Funkcja zwracająca liczbę unikalnych podciągów z teksu o długości podanej w parametrze
 	uint nof_unique_hashes(uint substr_len) {
 		uint position = 0;
 		last_max_hash = 0;
-		sort_by(Text::Sort::Ascii);
+		sort_by_ascii();
 		for(auto& character : text) {
-			if(character->ascii != last_max_hash) {
-				character->hash = ++position;
-				last_max_hash = character->ascii;
-			} else character->hash = position;
+			if(character.ascii != last_max_hash) {
+				character.hash = ++position;
+				last_max_hash = character.ascii;
+			} else character.hash = position;
 		}
-		sort_by(Text::Sort::Position);
+		sort_by_position();
 		uint hash_length = 1;
 
 		while(2 * hash_length <= substr_len) {
@@ -155,32 +137,37 @@ public:
 			generate_hashes();
 			hash_length += diff;
 		}
-		sort_by(Text::Sort::Hash);
+		sort_by_hash();
 		uint unique_hashes = 0;
 		uint last_hash = 0;
 		for(auto& character : text) {
-			if(character->initial_position > text.size() - hash_length) continue;
-			if(character->hash != last_hash) {
+			if(character.position > text.size() - hash_length) continue;
+			if(character.hash != last_hash) {
 				unique_hashes++;
-				last_hash = character->hash;
+				last_hash = character.hash;
 			}
 		}
 		return unique_hashes;
 	}
 };
 
+// Klasa licząca podciągi w tekście
 class SubstringCounter {
-	Text text;
+	Text text; // Tekst w formie specjalnej klasy
 public:
+
+	// Konstruktor przyjmujący string i inicjalizujący nim wewnętrzą strukturę tekstu
 	SubstringCounter(std::string str) : text(str) {}
+
+	// Funkcja zwracająca liczbę unikalnych podciągów  w tekście o długości podanej w parametrze
 	uint nof_unique_substrings(uint substring_length) {
 		return text.nof_unique_hashes(substring_length);
 	}
 };
 
 int main() {
-	uint n;
-	uint m;
+	uint n; // Liczba słów
+	uint m; // Długośc podciągów
 	std::cin >> n >> m;
 
 	std::string text;
@@ -189,9 +176,10 @@ int main() {
 		std::cin >> word;
 		text += word;
 	}
-	SubstringCounter counter(text);
 
-	std::cout << counter.nof_unique_substrings(m) << std::endl;
+	Text counter(text);
+
+	std::cout << counter.nof_unique_hashes(m) << std::endl;
 
 	return 0;
 }
