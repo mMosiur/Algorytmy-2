@@ -5,20 +5,20 @@
 
 typedef unsigned int uint;
 
-// Klasa reprezentuj¹ca strukturê zbiorów roz³¹cznych
+// Klasa reprezentujÄ…ca strukturÄ™ zbiorÃ³w rozÅ‚Ä…cznych
 class DisjointSets {
-    // Struktura reprezentuj¹ca element struktury zbiorów roz³¹cznych
+    // Struktura reprezentujÄ…ca element struktury zbiorÃ³w rozÅ‚Ä…cznych
     struct Element {
         uint id; // Id elementu
         uint parent_id; // Id rodzica elementu
-        uint subtree_size; // Wielkoœæ tworzonego poddrzewa
+        uint subtree_size; // WielkoÅ›Ä‡ tworzonego poddrzewa
     };
     
-    std::vector<Element> sets; // Wektor elementów struktury zbiorów roz³¹cznych
+    std::vector<Element> sets; // Wektor elementÃ³w struktury zbiorÃ³w rozÅ‚Ä…cznych
 
 public:
 
-    // Kontruktor przyjmuj¹cy iloœæ elementów i inicjalizuj¹cy ich zmienne
+    // Kontruktor przyjmujÄ…cy iloÅ›Ä‡ elementÃ³w i inicjalizujÄ…cy ich zmienne
     DisjointSets(uint nof_elements) {
         sets.reserve(nof_elements);
         for(uint i = 0; i < nof_elements; i++) {
@@ -26,7 +26,7 @@ public:
         }
     }
 
-    // Funkcja zwracaj¹ca wskaŸnik na rodzica elementu o id podanym w argumencie
+    // Funkcja zwracajÄ…ca wskaÅºnik na rodzica elementu o id podanym w argumencie
     Element* find_root(uint id) {
         while(sets[id].parent_id != id) {
             id = sets[id].parent_id;
@@ -34,16 +34,16 @@ public:
         return &sets[id];
     }
 
-    // Funkcja wykonuj¹ca uniê dwóch elementów o podanych id
-    // Zwraca true jeœli elementy s¹ ju¿ w tym samym drzewie i false, jeœli wykonana zosta³a unia
+    // Funkcja wykonujÄ…ca uniÄ™ dwÃ³ch elementÃ³w o podanych id
+    // Zwraca true jeÅ›li elementy sÄ… juÅ¼ w tym samym drzewie i false, jeÅ›li wykonana zostaÅ‚a unia
     bool union_roots(uint x, uint y) {
         Element* x_root = find_root(x);
         Element* y_root = find_root(y);
         if(x_root == y_root) return true;
-        if(x_root->subtree_size < y_root->subtree_size) { // y wiêksze od x
+        if(x_root->subtree_size < y_root->subtree_size) { // y wiÄ™ksze od x
             x_root->parent_id = y_root->id;
             y_root->subtree_size += x_root->subtree_size;
-        } else { // x wiêksze od (lub równe) y
+        } else { // x wiÄ™ksze od (lub rÃ³wne) y
             y_root->parent_id = x_root->id;
             x_root->subtree_size += y_root->subtree_size;
         }
@@ -52,14 +52,14 @@ public:
 
 };
 
-// Klasa reprezentuj¹ca graf
+// Klasa reprezentujÄ…ca graf
 class Graph {
-    const uint nof_members; // Liczba cz³onków portalu spo³ecznoœciowego
-    std::list<std::pair<uint, uint>> edges; // Lista krawêdzi reprezentowanych przez parê (id, id)
+    const uint nof_members; // Liczba czÅ‚onkÃ³w portalu spoÅ‚ecznoÅ›ciowego
+    std::list<std::pair<uint, uint>> edges; // Lista krawÄ™dzi reprezentowanych przez parÄ™ (id, id)
 
 public:
 
-    // Kontruktor przyjmuj¹cy liczbê cz³onków portalu, wczytuj¹cy odpowiednio dane i generuj¹cy na ich podstawie krawêdzie grafu
+    // Kontruktor przyjmujÄ…cy liczbÄ™ czÅ‚onkÃ³w portalu, wczytujÄ…cy odpowiednio dane i generujÄ…cy na ich podstawie krawÄ™dzie grafu
     Graph(const uint nof_members) : nof_members(nof_members) {
         std::map<uint, std::list<uint>> interest_groups;
         for(uint member = 0; member < nof_members; member++) {
@@ -81,7 +81,7 @@ public:
         }
     }
 
-    // Funkcja zwracaj¹ca, czy dany graf jest cykliczny
+    // Funkcja zwracajÄ…ca, czy dany graf jest cykliczny
     bool has_cycle() {
         DisjointSets sets(nof_members);
         for(auto& edge : edges) {
@@ -93,7 +93,7 @@ public:
 
 int main() {
 
-    uint n; // Iloœæ osób w grupie spo³ecznej
+    uint n; // IloÅ›Ä‡ osÃ³b w grupie spoÅ‚ecznej
 
     std::cin >> n;
 

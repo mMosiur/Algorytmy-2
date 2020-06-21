@@ -1,24 +1,24 @@
-# Przep³yw informacji
+# PrzepÅ‚yw informacji
 
-Partycja Logiczna po powrocie z Warszawy pochwali³a siê swoim innowacyjnym pomys³em znajomym. Zauwa¿y³a, ¿e w niektórych grupach spo³ecznych, do których nale¿y, przep³yw informacji jest bardzo dobry. W innych zaœ wiadomoœæ, któr¹ siê podzieli³a, wróci³a do niej. Wszystko by³oby w porz¹dku, gdyby jej rozmówca wiedzia³, ¿e ten innowacyjny pomys³ nale¿y do jej osoby. Niestety... rozczarowuj¹ce okaza³o siê, ¿e jej interlokutor nie by³ tego œwiadomy. Nic w tym dziwnego komunikacja interpersonalna powoduje, ¿e dane czêsto staj¹ siê “zaszumione” - przyk³adem mo¿e byæ gra “g³uchy telefon”.
+Partycja Logiczna po powrocie z Warszawy pochwaliÅ‚a siÄ™ swoim innowacyjnym pomysÅ‚em znajomym. ZauwaÅ¼yÅ‚a, Å¼e w niektÃ³rych grupach spoÅ‚ecznych, do ktÃ³rych naleÅ¼y, przepÅ‚yw informacji jest bardzo dobry. W innych zaÅ› wiadomoÅ›Ä‡, ktÃ³rÄ… siÄ™ podzieliÅ‚a, wrÃ³ciÅ‚a do niej. Wszystko byÅ‚oby w porzÄ…dku, gdyby jej rozmÃ³wca wiedziaÅ‚, Å¼e ten innowacyjny pomysÅ‚ naleÅ¼y do jej osoby. Niestety... rozczarowujÄ…ce okazaÅ‚o siÄ™, Å¼e jej interlokutor nie byÅ‚ tego Å›wiadomy. Nic w tym dziwnego komunikacja interpersonalna powoduje, Å¼e dane czÄ™sto stajÄ… siÄ™ â€œzaszumioneâ€ - przykÅ‚adem moÅ¼e byÄ‡ gra â€œgÅ‚uchy telefonâ€.
 
-Ca³a sytuacja bardzo zdenerwowa³a nasz¹ bohaterkê i dosz³a do wniosku, ¿e nie bêdzie chwali³a siê swoimi osi¹gniêciami w œrodowiskach, gdzie informacje mog¹ zataczaæ ko³o. Chce zmniejszyæ prawdopodobieñstwo wyst¹pienia takiej sytuacji, dlatego sk³onna jest wykluczyæ wszystkie grupy spo³eczne, gdzie dowolna informacja mo¿e do kogoœ wróciæ.
+CaÅ‚a sytuacja bardzo zdenerwowaÅ‚a naszÄ… bohaterkÄ™ i doszÅ‚a do wniosku, Å¼e nie bÄ™dzie chwaliÅ‚a siÄ™ swoimi osiÄ…gniÄ™ciami w Å›rodowiskach, gdzie informacje mogÄ… zataczaÄ‡ koÅ‚o. Chce zmniejszyÄ‡ prawdopodobieÅ„stwo wystÄ…pienia takiej sytuacji, dlatego skÅ‚onna jest wykluczyÄ‡ wszystkie grupy spoÅ‚eczne, gdzie dowolna informacja moÅ¼e do kogoÅ› wrÃ³ciÄ‡.
 
-Bohaterka wie, ¿e rozmawiaj¹ ze sob¹ osoby o wspólnych zainteresowaniach. Dodatkowo osoby te mog¹ rozmawiaæ na ró¿ne tematy, nie tylko te dotycz¹ce wspólnych zainteresowañ. Innymi s³owy przep³yw informacji jest pomiêdzy tymi dwiema osobami. Osoba, która otrzyma³a informacje od swojego rozmówcy mo¿e przekazaæ je innemu rozmówcy, z którym równie¿ ma wspólne zainteresowania.
+Bohaterka wie, Å¼e rozmawiajÄ… ze sobÄ… osoby o wspÃ³lnych zainteresowaniach. Dodatkowo osoby te mogÄ… rozmawiaÄ‡ na rÃ³Å¼ne tematy, nie tylko te dotyczÄ…ce wspÃ³lnych zainteresowaÅ„. Innymi sÅ‚owy przepÅ‚yw informacji jest pomiÄ™dzy tymi dwiema osobami. Osoba, ktÃ³ra otrzymaÅ‚a informacje od swojego rozmÃ³wcy moÅ¼e przekazaÄ‡ je innemu rozmÃ³wcy, z ktÃ³rym rÃ³wnieÅ¼ ma wspÃ³lne zainteresowania.
 
-Partycja zastanawia siê, które grupy spo³eczne wykluczyæ ze swojego przep³ywu informacji.
+Partycja zastanawia siÄ™, ktÃ³re grupy spoÅ‚eczne wykluczyÄ‡ ze swojego przepÅ‚ywu informacji.
 
-## WEJŒCIE
+## WEJÅšCIE
 
-W pierwszej linii wejœcia znajduje siê liczba naturalna **n**, mówi¹ca o iloœci osób w danej grupie spo³ecznej. Nastêpnie program powinien wczytaæ **n sekwencji danych: m**, czyli iloœæ zainteresowañ danego cz³onka grupy spo³ecznej, a nastêpnie **m liczb ca³kowitych** bêd¹cych odpowiednikami dziedzin, którymi jest zainteresowana ta osoba.
+W pierwszej linii wejÅ›cia znajduje siÄ™ liczba naturalna **n**, mÃ³wiÄ…ca o iloÅ›ci osÃ³b w danej grupie spoÅ‚ecznej. NastÄ™pnie program powinien wczytaÄ‡ **n sekwencji danych: m**, czyli iloÅ›Ä‡ zainteresowaÅ„ danego czÅ‚onka grupy spoÅ‚ecznej, a nastÄ™pnie **m liczb caÅ‚kowitych** bÄ™dÄ…cych odpowiednikami dziedzin, ktÃ³rymi jest zainteresowana ta osoba.
 
 **0 <= n, m, numery dziedzin <= 2000000000**
 
-## WYJŒCIE
+## WYJÅšCIE
 
-Na wyjœciu algorytm powinien wypisaæ jedn¹ z informacji: **TAK** - jeœli jakaœ informacja mo¿e wróciæ do tej samej osoby i tym samym Partycja powinna wykluczyæ t¹ grupê, **NIE** - w przeciwnym wypadku.
+Na wyjÅ›ciu algorytm powinien wypisaÄ‡ jednÄ… z informacji: **TAK** - jeÅ›li jakaÅ› informacja moÅ¼e wrÃ³ciÄ‡ do tej samej osoby i tym samym Partycja powinna wykluczyÄ‡ tÄ… grupÄ™, **NIE** - w przeciwnym wypadku.
 
-## PRZYK£ADOWE DANE WEJŒCIOWE
+## PRZYKÅADOWE DANE WEJÅšCIOWE
 
 I
 ```
@@ -38,7 +38,7 @@ II
 2 3 5
 ```
 
-## PRZYK£ADOWE DANE WYJŒCIOWE
+## PRZYKÅADOWE DANE WYJÅšCIOWE
 
 I
 ```
@@ -52,4 +52,4 @@ TAK
 
 ## UWAGI
 
-Rozwi¹zane zadania powinno byæ implementacj¹ struktury zbiorów roz³¹cznych.
+RozwiÄ…zane zadania powinno byÄ‡ implementacjÄ… struktury zbiorÃ³w rozÅ‚Ä…cznych.

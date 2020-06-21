@@ -1,21 +1,21 @@
 # Festiwal smaku
 
-Jak wiadomo w Lublinie czêsto odbywaj¹ siê spotkania kulinarne, degustacyjne i ró¿ne festiwale smaku. Jedna z kole¿anek Partycji (z grupy spo³ecznej, której nie wykluczy³a:) ) zajmuje siê organizacj¹ festiwalu degustacji tradycyjnych polskich potraw. Chcia³aby, aby to wydarzenie by³o jednym z najlepszych. Zale¿y jej na tym, aby ka¿dy zjad³ to, na co ma ochotê.
+Jak wiadomo w Lublinie czÄ™sto odbywajÄ… siÄ™ spotkania kulinarne, degustacyjne i rÃ³Å¼ne festiwale smaku. Jedna z koleÅ¼anek Partycji (z grupy spoÅ‚ecznej, ktÃ³rej nie wykluczyÅ‚a:) ) zajmuje siÄ™ organizacjÄ… festiwalu degustacji tradycyjnych polskich potraw. ChciaÅ‚aby, aby to wydarzenie byÅ‚o jednym z najlepszych. ZaleÅ¼y jej na tym, aby kaÅ¼dy zjadÅ‚ to, na co ma ochotÄ™.
 
-W zwi¹zku z tym Jagoda, bo tak ma na imiê kole¿anka naszej bohaterki, poprosi³a wszystkich zaproszonych na festiwal o wype³nienie ankiety. Ankieta polega na tym, ¿e ka¿dy uczestnik wydarzenia musi wybraæ potrawy, które chcia³by skosztowaæ. Oczywiœcie taka osoba mo¿e zaznaczyæ dowoln¹ iloœæ potraw z listy, które chêtnie by zjad³a. Uczestnik mo¿e zaznaczyæ wszystkie potrawy, ale równie dobrze mo¿e nie zaznaczyæ ¿adnej - wtedy wiemy, ¿e nie bêdzie on zadowolony. Poniewa¿ s¹ to bardzo ekskluzywne potrawy i kunsztowne, ekskluzywne wydarzenie na ka¿dego uczestnika przypada tylko jedna degustacja. Niestety dobranie odpowiednich posi³ków dla ka¿dego z goœci, jest ogromnym wyzwaniem organizacyjnym. Wynika to przede wszystkim z tego, ¿e ka¿dej potrawy zostanie przygotowana taka sama, ograniczona iloœæ. Dodatkowo Jagoda chce aby, jak najwiêcej osób wysz³o z wydarzenia zadowolonych. To zadowolenie gwarantuje jedynie to, ¿e przybysze zjedz¹ potrawê, która by³a na ich liœcie ¿yczeñ.
+W zwiÄ…zku z tym Jagoda, bo tak ma na imiÄ™ koleÅ¼anka naszej bohaterki, poprosiÅ‚a wszystkich zaproszonych na festiwal o wypeÅ‚nienie ankiety. Ankieta polega na tym, Å¼e kaÅ¼dy uczestnik wydarzenia musi wybraÄ‡ potrawy, ktÃ³re chciaÅ‚by skosztowaÄ‡. OczywiÅ›cie taka osoba moÅ¼e zaznaczyÄ‡ dowolnÄ… iloÅ›Ä‡ potraw z listy, ktÃ³re chÄ™tnie by zjadÅ‚a. Uczestnik moÅ¼e zaznaczyÄ‡ wszystkie potrawy, ale rÃ³wnie dobrze moÅ¼e nie zaznaczyÄ‡ Å¼adnej - wtedy wiemy, Å¼e nie bÄ™dzie on zadowolony. PoniewaÅ¼ sÄ… to bardzo ekskluzywne potrawy i kunsztowne, ekskluzywne wydarzenie na kaÅ¼dego uczestnika przypada tylko jedna degustacja. Niestety dobranie odpowiednich posiÅ‚kÃ³w dla kaÅ¼dego z goÅ›ci, jest ogromnym wyzwaniem organizacyjnym. Wynika to przede wszystkim z tego, Å¼e kaÅ¼dej potrawy zostanie przygotowana taka sama, ograniczona iloÅ›Ä‡. Dodatkowo Jagoda chce aby, jak najwiÄ™cej osÃ³b wyszÅ‚o z wydarzenia zadowolonych. To zadowolenie gwarantuje jedynie to, Å¼e przybysze zjedzÄ… potrawÄ™, ktÃ³ra byÅ‚a na ich liÅ›cie Å¼yczeÅ„.
 
 
-## WEJŒCIE
-W pierwszej linii wejœcia znajduj¹ siê liczby naturalne **n** **m** **l**, **n** - to liczba uczestników wydarzenia, **m** - to iloœæ dostêpnych potraw, zaœ **l** - to iloœæ zestawów degustacyjnych ka¿dej z potraw. Nastêpnie program powinien wczytaæ wyniki ankiety, które s¹ podane w macierzy o wymiarach **n x m**. Gdy uczestnik chce spróbowaæ potrawy wprowadzi³ ‘**x**’, a w przeciwnym wypadku ‘**o**’.
+## WEJÅšCIE
+W pierwszej linii wejÅ›cia znajdujÄ… siÄ™ liczby naturalne **n** **m** **l**, **n** - to liczba uczestnikÃ³w wydarzenia, **m** - to iloÅ›Ä‡ dostÄ™pnych potraw, zaÅ› **l** - to iloÅ›Ä‡ zestawÃ³w degustacyjnych kaÅ¼dej z potraw. NastÄ™pnie program powinien wczytaÄ‡ wyniki ankiety, ktÃ³re sÄ… podane w macierzy o wymiarach **n x m**. Gdy uczestnik chce sprÃ³bowaÄ‡ potrawy wprowadziÅ‚ â€˜**x**â€™, a w przeciwnym wypadku â€˜**o**â€™.
 
 **0 <= n, m, l <= 2000000000**
 
 
-## WYJŒCIE
-Na wyjœciu algorytm powinien wypisaæ jedn¹ liczbê ca³kowit¹, która jest najwiêksz¹ mo¿liw¹ liczb¹ osób zadowolonych z uczestnictwa w wydarzeniu.
+## WYJÅšCIE
+Na wyjÅ›ciu algorytm powinien wypisaÄ‡ jednÄ… liczbÄ™ caÅ‚kowitÄ…, ktÃ³ra jest najwiÄ™kszÄ… moÅ¼liwÄ… liczbÄ… osÃ³b zadowolonych z uczestnictwa w wydarzeniu.
 
 
-## PRZYK£ADOWE DANE WEJŒCIOWE
+## PRZYKÅADOWE DANE WEJÅšCIOWE
 ```
 6 3 2
 o o x
@@ -26,10 +26,10 @@ x o x
 x o o
 ```
 
-## PRZYK£ADOWE DANE WYJŒCIOWE
+## PRZYKÅADOWE DANE WYJÅšCIOWE
 ```
 5
 ```
 
 ## UWAGI
-Rozwi¹zane zadania powinno byæ implementacj¹ metody wyszukiwania maksymalnego skojarzenia w grafie dwudzielnym
+RozwiÄ…zane zadania powinno byÄ‡ implementacjÄ… metody wyszukiwania maksymalnego skojarzenia w grafie dwudzielnym

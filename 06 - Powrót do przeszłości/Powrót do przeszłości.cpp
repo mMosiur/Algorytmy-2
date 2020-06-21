@@ -4,22 +4,22 @@
 
 typedef unsigned int uint;
 
-// Struktura reprezentuj¹ca wêze³ drzewa
+// Struktura reprezentujÄ…ca wÄ™zeÅ‚ drzewa
 struct Node {
-    uint key; // Klucz wêz³a
+    uint key; // Klucz wÄ™zÅ‚a
 
-    // Konstruktor przyjmuj¹cy wartoœæ klucza i incjalizuj¹cy pola
+    // Konstruktor przyjmujÄ…cy wartoÅ›Ä‡ klucza i incjalizujÄ…cy pola
     Node(uint key) : key(key), parent(nullptr), left_child(nullptr), right_child(nullptr) {}
 
-    friend class ClueSearcher; // ZaprzyjaŸnienie z klas¹ poszukiwacza, ¿eby mia³ dostêp do metod prywatych
+    friend class ClueSearcher; // ZaprzyjaÅºnienie z klasÄ… poszukiwacza, Å¼eby miaÅ‚ dostÄ™p do metod prywatych
 
 private:
 
-    Node* parent; // WskaŸnik na wêzê³ rodzica
-    Node* left_child; // WskaŸnik na wêze³ lewego dziecka
-    Node* right_child; // WskaŸnik na wêze³ prawego dziecka
+    Node* parent; // WskaÅºnik na wÄ™zÄ™Å‚ rodzica
+    Node* left_child; // WskaÅºnik na wÄ™zeÅ‚ lewego dziecka
+    Node* right_child; // WskaÅºnik na wÄ™zeÅ‚ prawego dziecka
 
-    // Funkcja zwracaj¹ca najwiêkszego mniejszego potomka tego wêz³a
+    // Funkcja zwracajÄ…ca najwiÄ™kszego mniejszego potomka tego wÄ™zÅ‚a
     Node* biggest_lower_descendant() {
         if(left_child == nullptr) return nullptr;
         Node* pos = left_child;
@@ -29,15 +29,15 @@ private:
         return pos;
     }
 
-    // Funkcja dodaj¹ca dany wêze³ jako dziecko (lub dalszy potomek)
+    // Funkcja dodajÄ…ca dany wÄ™zeÅ‚ jako dziecko (lub dalszy potomek)
     void add_child(Node*& node) {
-        if(node->key <= key) { // Klucz mniejszy b¹dŸ równy temu wêz³owi
+        if(node->key <= key) { // Klucz mniejszy bÄ…dÅº rÃ³wny temu wÄ™zÅ‚owi
             if(left_child) left_child->add_child(node);
             else {
                 node->parent = this;
                 left_child = node;
             }
-        } else { // Klucz wiêkszy ni¿ tego wêz³a
+        } else { // Klucz wiÄ™kszy niÅ¼ tego wÄ™zÅ‚a
             if(right_child) right_child->add_child(node);
             else {
                 node->parent = this;
@@ -46,7 +46,7 @@ private:
         }
     }
 
-    // Funkcja znajduj¹ca wêze³ z argumentu w dzieciach i odpinaj¹ca go od tego wêz³a
+    // Funkcja znajdujÄ…ca wÄ™zeÅ‚ z argumentu w dzieciach i odpinajÄ…ca go od tego wÄ™zÅ‚a
     void detach_child(Node* child) {
         if(child == nullptr) exit(1);
         if(child == left_child) {
@@ -58,7 +58,7 @@ private:
         }
     }
 
-    // Funkcja zwracaj¹ca nastêpnika danego wêz³a (nastêpny wêze³ co do wielkoœci)
+    // Funkcja zwracajÄ…ca nastÄ™pnika danego wÄ™zÅ‚a (nastÄ™pny wÄ™zeÅ‚ co do wielkoÅ›ci)
     Node* successor() {
         if(right_child) {
             Node* pos = right_child;
@@ -72,7 +72,7 @@ private:
         }
     }
 
-    // Funkcja zawracaj¹ca poprzednika danego wêz³a (poprzedni wêze³ co do wielkoœci
+    // Funkcja zawracajÄ…ca poprzednika danego wÄ™zÅ‚a (poprzedni wÄ™zeÅ‚ co do wielkoÅ›ci
     Node* predecessor() {
         if(left_child) {
             Node* pos = left_child;
@@ -88,14 +88,14 @@ private:
 
 };
 
-// Klasa reprezentujaca poszukiwacz pary tropów
+// Klasa reprezentujaca poszukiwacz pary tropÃ³w
 class ClueSearcher {
 
-    Node* root; // WskaŸnik na korzeñ drzewa BST
-    std::pair<uint, uint> bounds; // Para liczb bêd¹ca granicami drzewa
-    uint estimate; // Szacowana wartoœæ docelowa
+    Node* root; // WskaÅºnik na korzeÅ„ drzewa BST
+    std::pair<uint, uint> bounds; // Para liczb bÄ™dÄ…ca granicami drzewa
+    uint estimate; // Szacowana wartoÅ›Ä‡ docelowa
 
-    // Funkcja zwracaj¹ca wskaŸnik na wêze³ o podanym kluczu
+    // Funkcja zwracajÄ…ca wskaÅºnik na wÄ™zeÅ‚ o podanym kluczu
     Node* find_node(uint key) {
         Node* pos = root;
         while(pos && pos->key != key) {
@@ -104,18 +104,18 @@ class ClueSearcher {
         return pos;
     }
 
-    // Funkcja dodaj¹ca do drzewa nowy wêze³ o podanym kluczu
+    // Funkcja dodajÄ…ca do drzewa nowy wÄ™zeÅ‚ o podanym kluczu
     void add_node(uint key) {
         Node* new_node = new Node(key);
         if(root == nullptr) root = new_node;
         else root->add_child(new_node);
     }
 
-    // Funkcja usuwaj¹ca wêze³ o podanym kluczu z drzewa
+    // Funkcja usuwajÄ…ca wÄ™zeÅ‚ o podanym kluczu z drzewa
     void delete_node(uint key) {
         Node* node = find_node(key);
         if(node == nullptr) exit(1);
-        if(node->left_child && node->right_child) { // Dwójka dzieci
+        if(node->left_child && node->right_child) { // DwÃ³jka dzieci
             Node* highest_left_child = node->biggest_lower_descendant();
             swap_nodes(node, highest_left_child);
         }
@@ -137,7 +137,7 @@ class ClueSearcher {
         delete node;
     }
 
-    // Funkcja usuwaj¹ca podany w argumencie wêze³ wrac ze wszysktimi jego potomkami
+    // Funkcja usuwajÄ…ca podany w argumencie wÄ™zeÅ‚ wrac ze wszysktimi jego potomkami
     void delete_subtree(Node* node) {
         if(node == nullptr) return;
         if(node->left_child) delete_subtree(node->left_child);
@@ -146,16 +146,16 @@ class ClueSearcher {
         delete node;
     }
 
-    // Funkcja przycinaj¹ca wêze³ i wszystkich jego potomków oraz zwracaj¹ca wskaŸnik na nowy wêze³ w jego miejscu
+    // Funkcja przycinajÄ…ca wÄ™zeÅ‚ i wszystkich jego potomkÃ³w oraz zwracajÄ…ca wskaÅºnik na nowy wÄ™zeÅ‚ w jego miejscu
     Node* trimmed_node(Node* node) {
         if(node == nullptr) return nullptr;
-        if(node->key < bounds.first) { // Klucz mniejszy ni¿ dolna granica
+        if(node->key < bounds.first) { // Klucz mniejszy niÅ¼ dolna granica
             delete_subtree(node->left_child);
             Node* trimmed_right = trimmed_node(node->right_child);
             if(trimmed_right) trimmed_right->parent = node->parent;
             delete node;
             return trimmed_right;
-        } else if(node->key > bounds.second) { // Klucz wiêkszy ni¿ górna granica
+        } else if(node->key > bounds.second) { // Klucz wiÄ™kszy niÅ¼ gÃ³rna granica
             delete_subtree(node->right_child);
             Node* trimmed_left = trimmed_node(node->left_child);
             if(trimmed_left) trimmed_left->parent = node->parent;
@@ -170,7 +170,7 @@ class ClueSearcher {
         }
     }
 
-    // Funkcja zamieniaj¹ca miejscami dwa wêz³y
+    // Funkcja zamieniajÄ…ca miejscami dwa wÄ™zÅ‚y
     void swap_nodes(Node*& a, Node*& b) {
         uint tkey = a->key;
         a->key = b->key;
@@ -180,7 +180,7 @@ class ClueSearcher {
         b = tnode;
     }
 
-    // Funkcja zwracaj¹ca, czy znaleziono parê dla danego wêz³a lub wêz³a potomnego i wypisuj¹ca j¹ w takowym przypadku
+    // Funkcja zwracajÄ…ca, czy znaleziono parÄ™ dla danego wÄ™zÅ‚a lub wÄ™zÅ‚a potomnego i wypisujÄ…ca jÄ… w takowym przypadku
     bool find_pair(Node* node, std::unordered_set<uint>& checked) {
         if(node == nullptr) return false;
         if(find_pair(node->left_child, checked)) return true;
@@ -200,7 +200,7 @@ class ClueSearcher {
 
 public:
 
-    // Kontruktor przyjmuj¹cy liczbê tropów i wczytuj¹cy resztê danych
+    // Kontruktor przyjmujÄ…cy liczbÄ™ tropÃ³w i wczytujÄ…cy resztÄ™ danych
     ClueSearcher(uint nof_clues) : root(nullptr) {
         for(uint i = 0; i < nof_clues; i++) {
             uint key;
@@ -212,8 +212,8 @@ public:
         root = trimmed_node(root);
     }
 
-    // Funkcja wypisuj¹ca parê liczb bêd¹cych kluczami dwóch poszukiwanych tropów
-    // Wypisuje NIE ZNALEZIONO gdy takie nie bêd¹ znalezione
+    // Funkcja wypisujÄ…ca parÄ™ liczb bÄ™dÄ…cych kluczami dwÃ³ch poszukiwanych tropÃ³w
+    // Wypisuje NIE ZNALEZIONO gdy takie nie bÄ™dÄ… znalezione
     void print_pair() {
         std::unordered_set<uint> checked;
         if(!find_pair(root, checked)) {
@@ -223,7 +223,7 @@ public:
 };
 
 int main() {
-    uint n; // Liczba tropów politycznych
+    uint n; // Liczba tropÃ³w politycznych
 
     std::cin >> n;
 

@@ -1,5 +1,5 @@
-# Podró¿ do Warszawy (kolejne podejœcie)
+# PodrÃ³Å¼ do Warszawy (kolejne podejÅ›cie)
 
-Partycja Logiczna nie do koñca wierzy wynikom programów napisanych przez studentów (mo¿e dlatego, ¿e jest wystarczaj¹co stara, ¿eby pamiêtaæ tworzenie systemu dla ZUS-u). Dlatego poprosi³a o sprawdzenie wyników niezale¿nie napisanym programem. ¯eby zabezpieczyæ siê na wypadek u¿ycia przez kogoœ tego samego programu ze zmienionymi nazwami zmiennych itp. postawi³a warunek, ¿e program musi wykorzystywaæ kopce Fibonacciego (Partycja wie, ¿e nikt o zdrowych zmys³ach nie implementuje kopców Fibonacciego o ile nie musi).
+Partycja Logiczna nie do koÅ„ca wierzy wynikom programÃ³w napisanych przez studentÃ³w (moÅ¼e dlatego, Å¼e jest wystarczajÄ…co stara, Å¼eby pamiÄ™taÄ‡ tworzenie systemu dla ZUS-u). Dlatego poprosiÅ‚a o sprawdzenie wynikÃ³w niezaleÅ¼nie napisanym programem. Å»eby zabezpieczyÄ‡ siÄ™ na wypadek uÅ¼ycia przez kogoÅ› tego samego programu ze zmienionymi nazwami zmiennych itp. postawiÅ‚a warunek, Å¼e program musi wykorzystywaÄ‡ kopce Fibonacciego (Partycja wie, Å¼e nikt o zdrowych zmysÅ‚ach nie implementuje kopcÃ³w Fibonacciego o ile nie musi).
 
-Wyœlij program bêd¹cy rozwi¹zaniem pierwszego zadania, ale u¿ywaj¹cy kopców Fibonacciego i funkcji DecreaseKey.
+WyÅ›lij program bÄ™dÄ…cy rozwiÄ…zaniem pierwszego zadania, ale uÅ¼ywajÄ…cy kopcÃ³w Fibonacciego i funkcji DecreaseKey.

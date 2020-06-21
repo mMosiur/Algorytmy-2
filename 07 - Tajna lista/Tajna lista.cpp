@@ -3,50 +3,50 @@
 typedef unsigned short ushort;
 typedef unsigned int uint;
 
-// Klasa drzewa czerwono-czarnego z wbudowan¹ list¹
+// Klasa drzewa czerwono-czarnego z wbudowanÄ… listÄ…
 class RedBlackListTree {
-    // Struktura wêz³a w drzewie czerwono czarnym z wbudowanym wêz³em listy
+    // Struktura wÄ™zÅ‚a w drzewie czerwono czarnym z wbudowanym wÄ™zÅ‚em listy
     struct RedBlackListTreeNode {
-        enum class Color { RED, BLACK }; // Enum koloru wêz³a
-        std::string key; // Klucz wêz³a
-        Color color; // Kolor wêz³a
-        RedBlackListTreeNode* parent; // WskaŸnik na rodzica wêz³a
-        RedBlackListTreeNode* left; // WskaŸnik na lewe dziecko wêz³a
-        RedBlackListTreeNode* right; // WskaŸnik na prawe dziecko wêz³a
-        RedBlackListTreeNode* prev; // WskaŸnik na poprzedni element listy
-        RedBlackListTreeNode* next; // WskaŸnik na nastêpny element listy
+        enum class Color { RED, BLACK }; // Enum koloru wÄ™zÅ‚a
+        std::string key; // Klucz wÄ™zÅ‚a
+        Color color; // Kolor wÄ™zÅ‚a
+        RedBlackListTreeNode* parent; // WskaÅºnik na rodzica wÄ™zÅ‚a
+        RedBlackListTreeNode* left; // WskaÅºnik na lewe dziecko wÄ™zÅ‚a
+        RedBlackListTreeNode* right; // WskaÅºnik na prawe dziecko wÄ™zÅ‚a
+        RedBlackListTreeNode* prev; // WskaÅºnik na poprzedni element listy
+        RedBlackListTreeNode* next; // WskaÅºnik na nastÄ™pny element listy
 
-        // Konstruktor przyjmuj¹cy klucz i wartoœæ wêz³a oraz inicjalizuj¹cy zmienne w wêŸle
+        // Konstruktor przyjmujÄ…cy klucz i wartoÅ›Ä‡ wÄ™zÅ‚a oraz inicjalizujÄ…cy zmienne w wÄ™Åºle
         RedBlackListTreeNode(std::string key) : key(key), color(RedBlackListTreeNode::Color::RED), parent(nullptr), left(nullptr), right(nullptr), prev(nullptr), next(nullptr) {}
 
-        // Funkcja zwracaj¹ca, czy wêze³ jest lewym dzieckiem (false gdy nie ma rodzica)
+        // Funkcja zwracajÄ…ca, czy wÄ™zeÅ‚ jest lewym dzieckiem (false gdy nie ma rodzica)
         bool is_left() {
             if(parent && this == parent->left) return true;
             return false;
         }
 
-        // Funkcja zwracaj¹ca, czy wêze³ jest prawym dzieckiem (false gdy nie ma rodzica)
+        // Funkcja zwracajÄ…ca, czy wÄ™zeÅ‚ jest prawym dzieckiem (false gdy nie ma rodzica)
         bool is_right() {
             if(parent && this == parent->right) return true;
             return false;
         }
 
-        // Funkcja zwracaj¹ca wskaŸnik na brata tego wêz³a (nullptr gdy nie ma brata)
+        // Funkcja zwracajÄ…ca wskaÅºnik na brata tego wÄ™zÅ‚a (nullptr gdy nie ma brata)
         RedBlackListTreeNode* brother() {
             if(!parent) return nullptr;
             if(is_left()) return parent->right;
             return parent->left;
         }
         
-        // Funkcja dodaj¹ca dziecko do tego wêz³a, lub do jednego z dzieci tego wêz³a
+        // Funkcja dodajÄ…ca dziecko do tego wÄ™zÅ‚a, lub do jednego z dzieci tego wÄ™zÅ‚a
         void add_child(RedBlackListTreeNode*& node) {
-            if(node->key < key) { // Klucz mniejszy od tego wêz³a
+            if(node->key < key) { // Klucz mniejszy od tego wÄ™zÅ‚a
                 if(left) left->add_child(node);
                 else {
                     node->parent = this;
                     left = node;
                 }
-            } else { // Klucz wiêkszy ni¿ tego wêz³a
+            } else { // Klucz wiÄ™kszy niÅ¼ tego wÄ™zÅ‚a
                 if(right) right->add_child(node);
                 else {
                     node->parent = this;
@@ -57,11 +57,11 @@ class RedBlackListTree {
     };
     typedef RedBlackListTreeNode Node;
 
-    Node* tree_root; // WskaŸnik na korzeñ drzewa
-    Node* list_first; // WskaŸnik na pierwszy element listy
-    Node* list_last; // WskaŸnik na ostatni element listy
+    Node* tree_root; // WskaÅºnik na korzeÅ„ drzewa
+    Node* list_first; // WskaÅºnik na pierwszy element listy
+    Node* list_last; // WskaÅºnik na ostatni element listy
 
-    // Funkcja wykonuj¹ca rotacjê w lewo danego wêz³a
+    // Funkcja wykonujÄ…ca rotacjÄ™ w lewo danego wÄ™zÅ‚a
     void rotate_left(Node*& node) {
         Node* pivot = node->right;
         node->right = pivot->left;
@@ -78,7 +78,7 @@ class RedBlackListTree {
         node->parent = pivot;
     }
 
-    // Funkcja wykonuj¹ca rotacjê w prawo danego wêz³a
+    // Funkcja wykonujÄ…ca rotacjÄ™ w prawo danego wÄ™zÅ‚a
     void rotate_right(Node*& node) {
         Node* pivot = node->left;
         node->left = pivot->right;
@@ -95,7 +95,7 @@ class RedBlackListTree {
         node->parent = pivot;
     }
 
-    // Funkcja zwracaj¹ca wskaŸnik na wêze³ o podanym kluczu (nullptr gdy nie znaleziono)
+    // Funkcja zwracajÄ…ca wskaÅºnik na wÄ™zeÅ‚ o podanym kluczu (nullptr gdy nie znaleziono)
     Node* find(std::string key) {
         Node* pos = tree_root;
         while(pos && pos->key != key) {
@@ -116,7 +116,7 @@ public:
         }
     }
 
-    // Operacja wstawienia wêz³a o podanym kluczu do drzewa
+    // Operacja wstawienia wÄ™zÅ‚a o podanym kluczu do drzewa
     void insert(std::string key) {
         Node* node = new Node(key);
         if(tree_root == nullptr) {
@@ -157,18 +157,18 @@ public:
         }
     }
 
-    // Operacja zamieniaj¹ca pozycjami wêz³y o podanych kluczach w liœcie
+    // Operacja zamieniajÄ…ca pozycjami wÄ™zÅ‚y o podanych kluczach w liÅ›cie
     void swap_nodes_in_list(std::string key1, std::string key2) {
         Node* node1 = find(key1);
         Node* node2 = find(key2);
-        if(node1 == node2->next || node2 == node1->next) { // Wêz³y s¹ s¹siaduj¹ce
+        if(node1 == node2->next || node2 == node1->next) { // WÄ™zÅ‚y sÄ… sÄ…siadujÄ…ce
             Node* first = (node1 == node2->next ? node2 : node1);
             Node* second = (node1 == node2->next ? node1 : node2);
             second->prev = first->prev;
             first->prev = second;
             first->next = second->next;
             second->next = first;
-        } else { // Wêz³y nie s¹ s¹siaduj¹ce
+        } else { // WÄ™zÅ‚y nie sÄ… sÄ…siadujÄ…ce
             std::swap(node1->next, node2->next);
             std::swap(node1->prev, node2->prev);
         }
@@ -182,11 +182,11 @@ public:
         else list_last = node2;
     }
 
-    // Przesuwa wêze³ o podanym kluczu o podan¹ liczbê miejsc (ujemne w lewo, dodatnie w prawo)
+    // Przesuwa wÄ™zeÅ‚ o podanym kluczu o podanÄ… liczbÄ™ miejsc (ujemne w lewo, dodatnie w prawo)
     void move_key_by(std::string key, int offset) {
         Node* node = find(key);
         Node* new_next_node = node;
-        // Znalezienie wêz³a, który bêdzie nowym nastêpcom przesuwanego wêz³a (nullptr oznacza, ¿e przesuwamy na koniec)
+        // Znalezienie wÄ™zÅ‚a, ktÃ³ry bÄ™dzie nowym nastÄ™pcom przesuwanego wÄ™zÅ‚a (nullptr oznacza, Å¼e przesuwamy na koniec)
         if(offset < 0) {
             offset = -offset;
             for(ushort i = 0; i < offset; i++) new_next_node = new_next_node->prev;
@@ -194,18 +194,18 @@ public:
             new_next_node = new_next_node->next;
             for(ushort i = 0; i < offset; i++) new_next_node = new_next_node->next;
         }
-        // Wypinamy przesuwany wêze³ z listy
+        // Wypinamy przesuwany wÄ™zeÅ‚ z listy
         if(node->prev) node->prev->next = node->next;
         else list_first = node->next;
         if(node->next) node->next->prev = node->prev;
         else if(node->prev) list_last = node->prev;
         else throw;
-        // Wpinamy przesuwany wêze³ w odpowiednie miejsce
+        // Wpinamy przesuwany wÄ™zeÅ‚ w odpowiednie miejsce
         if(new_next_node == nullptr) { // Wpinamy na koniec
             list_last->next = node;
             node->prev = list_last;
             list_last = node;
-        } else { // Wpinamy przed nowy nastêpny wêze³
+        } else { // Wpinamy przed nowy nastÄ™pny wÄ™zeÅ‚
             node->next = new_next_node;
             node->prev = new_next_node->prev;
             if(new_next_node->prev) new_next_node->prev->next = node;
@@ -214,7 +214,7 @@ public:
         }
     }
 
-    // Wypisujemy listê
+    // Wypisujemy listÄ™
     void print() const {
         Node* pos = list_first;
         while(pos) {
@@ -224,28 +224,28 @@ public:
     }
 };
 
-// Klasa listy osób 
+// Klasa listy osÃ³b 
 class List {
-    RedBlackListTree tree; // Drzewo czerwono czarne z wbudowan¹ list¹
+    RedBlackListTree tree; // Drzewo czerwono czarne z wbudowanÄ… listÄ…
 
-    // Funkcja wykonuj¹ca komendê 'a' - dodaj¹ca do drzewa osobê o podanym pseudonimie
+    // Funkcja wykonujÄ…ca komendÄ™ 'a' - dodajÄ…ca do drzewa osobÄ™ o podanym pseudonimie
     void add(std::string name) {
         tree.insert(name);
     }
 
-    // Funkcja wykonuj¹ca komendê 'm' - przesuwaj¹ca osobê o podanym pseudonimie o dan¹ liczbê miejsc
+    // Funkcja wykonujÄ…ca komendÄ™ 'm' - przesuwajÄ…ca osobÄ™ o podanym pseudonimie o danÄ… liczbÄ™ miejsc
     void move(std::string name, int offset) {
         tree.move_key_by(name, -offset);
     }
 
-    // Funkcja wykonuj¹ca komendê 'r' - zamieniaj¹ca osoby o podanych pseudonimach miejscami w liœcie
+    // Funkcja wykonujÄ…ca komendÄ™ 'r' - zamieniajÄ…ca osoby o podanych pseudonimach miejscami w liÅ›cie
     void swap(std::string name1, std::string name2) {
         tree.swap_nodes_in_list(name1, name2);
     }
 
 public:
 
-    // Konstruktor przujmyj¹cy liczbê osób i wczytuj¹cy ich pseudonimy do drzewa
+    // Konstruktor przujmyjÄ…cy liczbÄ™ osÃ³b i wczytujÄ…cy ich pseudonimy do drzewa
     List(ushort nof_people) {
         for(ushort i = 0; i < nof_people; i++) {
             std::string name;
@@ -254,7 +254,7 @@ public:
         }
     }
 
-    // Funkcja przyjmuj¹ca liczbê operacji do wykonania, nastêpnie wczytujaca dane tych operacji i wykonuj¹ca je
+    // Funkcja przyjmujÄ…ca liczbÄ™ operacji do wykonania, nastÄ™pnie wczytujaca dane tych operacji i wykonujÄ…ca je
     void execute_operations(ushort nof_operations) {
         for(ushort i = 0; i < nof_operations; i++) {
             char operation;
@@ -284,7 +284,7 @@ public:
         }
     }
 
-    // Funkcja wypisuj¹ca listê
+    // Funkcja wypisujÄ…ca listÄ™
     void print() {
         tree.print();
     }
@@ -294,13 +294,13 @@ public:
 int main() {
     std::ios::sync_with_stdio(false);
 
-    ushort n; // Pocz¹tkowa liczba osób na liœcie
+    ushort n; // PoczÄ…tkowa liczba osÃ³b na liÅ›cie
     std::cin >> n;
     List lista(n); // Obiekt listy
     ushort m; // Liczba operacji
     std::cin >> m;
     lista.execute_operations(m); // Wykonaj operacje
-    lista.print(); // Wypisz zawartoœæ listy
+    lista.print(); // Wypisz zawartoÅ›Ä‡ listy
 
     return 0;
 }

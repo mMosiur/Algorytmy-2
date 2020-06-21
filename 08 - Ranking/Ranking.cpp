@@ -5,20 +5,20 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 
 constexpr ushort T = 16; // Parametr T charakterystyczny dla b-drzewa
-constexpr ushort MIN_ITEMS = T - 1; // Minimalna liczba kluczy dla danego wêz³a (nie licz¹c korzenia)
-constexpr ushort MAX_ITEMS = 2 * T - 1; // Maksymalna liczba kluczy dla danego wêz³a
-constexpr ushort MIN_CHILDREN = T; // Minimalna liczba dzieci danego wêz³a (nie licz¹c korzenia)
-constexpr ushort MAX_CHILDREN = 2 * T; // Maksymalna liczba dzieci danego wêz³a
+constexpr ushort MIN_ITEMS = T - 1; // Minimalna liczba kluczy dla danego wÄ™zÅ‚a (nie liczÄ…c korzenia)
+constexpr ushort MAX_ITEMS = 2 * T - 1; // Maksymalna liczba kluczy dla danego wÄ™zÅ‚a
+constexpr ushort MIN_CHILDREN = T; // Minimalna liczba dzieci danego wÄ™zÅ‚a (nie liczÄ…c korzenia)
+constexpr ushort MAX_CHILDREN = 2 * T; // Maksymalna liczba dzieci danego wÄ™zÅ‚a
 
-// Struktura reprezentuj¹ca pojedynczy element przechowywany w wêŸle b-drzewa
+// Struktura reprezentujÄ…ca pojedynczy element przechowywany w wÄ™Åºle b-drzewa
 struct Item {
     const double key; // Klucz elementu
-    const std::string value; // Wartoœæ elementu
+    const std::string value; // WartoÅ›Ä‡ elementu
 
-    // Konstruktor przyjmuj¹cy i inicjalizuj¹cy zmienne
+    // Konstruktor przyjmujÄ…cy i inicjalizujÄ…cy zmienne
     Item(const double key, const std::string value) : key(key), value(value) {}
 
-    // Funkcja wypisuj¹ca wartoœæ elementu, je¿eli jej klucz mieœci siê miêdzy podanymi wartoœciami
+    // Funkcja wypisujÄ…ca wartoÅ›Ä‡ elementu, jeÅ¼eli jej klucz mieÅ›ci siÄ™ miÄ™dzy podanymi wartoÅ›ciami
     void print_if_between(const double lower_bound, const double upper_bound) const {
         if(key < lower_bound) return;
         if(key > upper_bound) return;
@@ -26,24 +26,24 @@ struct Item {
     }
 };
 
-// Klasa reprezentuj¹ca b-drzewo
+// Klasa reprezentujÄ…ca b-drzewo
 class BTree {
 
-    // Struktura wêze³a b-drzewa
+    // Struktura wÄ™zeÅ‚a b-drzewa
     struct Node {
-        std::array<const Item*, MAX_ITEMS> items; // Tablica wskaŸników na elementy trzymane w danym wêŸle
-        ushort nof_items; // Iloœæ elementów aktualnie znajduj¹cych siê w wêŸle
-        std::array<Node*, MAX_CHILDREN> children; // Tablica wskaŸników na dzieci danego wêz³a
-        Node* parent; // WskaŸnik na rodzica danego wêz³a
-        bool is_leaf; // Zmienna wskazuj¹ca, czy dany wêze³ jest liœciem
+        std::array<const Item*, MAX_ITEMS> items; // Tablica wskaÅºnikÃ³w na elementy trzymane w danym wÄ™Åºle
+        ushort nof_items; // IloÅ›Ä‡ elementÃ³w aktualnie znajdujÄ…cych siÄ™ w wÄ™Åºle
+        std::array<Node*, MAX_CHILDREN> children; // Tablica wskaÅºnikÃ³w na dzieci danego wÄ™zÅ‚a
+        Node* parent; // WskaÅºnik na rodzica danego wÄ™zÅ‚a
+        bool is_leaf; // Zmienna wskazujÄ…ca, czy dany wÄ™zeÅ‚ jest liÅ›ciem
 
-        // Konstruktor przyjmuj¹cy dane i inicjalizuj¹cy zmienne
+        // Konstruktor przyjmujÄ…cy dane i inicjalizujÄ…cy zmienne
         Node() : is_leaf(true), parent(nullptr), nof_items(0) {
             items.fill(nullptr);
             children.fill(nullptr);
         }
 
-        // Funkcja wstawiaj¹ca w dan¹ pozycjê w wêŸle nullptr, w³¹cznie/wy³¹cznie z najbardziej lewym dzieckiem
+        // Funkcja wstawiajÄ…ca w danÄ… pozycjÄ™ w wÄ™Åºle nullptr, wÅ‚Ä…cznie/wyÅ‚Ä…cznie z najbardziej lewym dzieckiem
         void insert_nullptr_at(ushort position, bool most_left_child_inclusive = false) {
             if(items[position] == nullptr) return;
             for(ushort last = nof_items; last > position; last--) {
@@ -59,7 +59,7 @@ class BTree {
             }
         }
 
-        // Funkcja wype³niaj¹ca nullptr na danej pozycji, przesuwaj¹ca elementy w lewo (wraz z dekrementacj¹ iloœci elementów)
+        // Funkcja wypeÅ‚niajÄ…ca nullptr na danej pozycji, przesuwajÄ…ca elementy w lewo (wraz z dekrementacjÄ… iloÅ›ci elementÃ³w)
         void fill_nullptr_at(ushort position) {
             nof_items--;
             while(position < nof_items) {
@@ -72,12 +72,12 @@ class BTree {
             children[position + 1] = nullptr;
         }
 
-        // Funkcja dziel¹ca dany wêze³ na dwa
+        // Funkcja dzielÄ…ca dany wÄ™zeÅ‚ na dwa
         void split() {
             Node* new_node = new Node();
             new_node->is_leaf = this->is_leaf;
             ushort sep = nof_items / 2;
-            // Przesuniêcie kluczy po prawej od œrodka do nowego wêz³a
+            // PrzesuniÄ™cie kluczy po prawej od Å›rodka do nowego wÄ™zÅ‚a
             new_node->nof_items = sep;
             for(ushort i = 0; i < new_node->nof_items; i++) {
                 new_node->items[i] = this->items[sep + 1 + i];
@@ -85,14 +85,14 @@ class BTree {
             }
             this->nof_items -= sep;
             if(!is_leaf) {
-                // Przesuniêcie dzieci po prawej od œrodka do nowego wêz³a
+                // PrzesuniÄ™cie dzieci po prawej od Å›rodka do nowego wÄ™zÅ‚a
                 for(ushort i = 0; i <= new_node->nof_items; i++) {
                     new_node->children[i] = this->children[sep + 1 + i];
                     new_node->children[i]->parent = new_node;
                     this->children[sep + 1 + i] = nullptr;
                 }
             }
-            // Przesuniêcie œrodkowego klucza do rodzica
+            // PrzesuniÄ™cie Å›rodkowego klucza do rodzica
             if(parent) {
                 ushort pos = 0;
                 while(parent->children[pos] != this) pos++;
@@ -117,7 +117,7 @@ class BTree {
             }
         }
 
-        // Funkcja przesuwaj¹ca element z brata po lewej do tego wêz³a
+        // Funkcja przesuwajÄ…ca element z brata po lewej do tego wÄ™zÅ‚a
         void take_key_from_left(ushort pos_in_parent) {
             Node* brother = parent->children[pos_in_parent - 1];
             this->insert_nullptr_at(0, true);
@@ -133,7 +133,7 @@ class BTree {
             brother->nof_items--;
         }
 
-        // Funkcja przesuwaj¹ca element z brata po prawej do tego wêz³a
+        // Funkcja przesuwajÄ…ca element z brata po prawej do tego wÄ™zÅ‚a
         void take_key_from_right(ushort pos_in_parent) {
             Node* brother = parent->children[pos_in_parent + 1];
             if(!is_leaf) {
@@ -145,10 +145,10 @@ class BTree {
             this->nof_items++;
             parent->items[pos_in_parent] = brother->items[0];
             brother->items[0] = nullptr;
-            brother->fill_nullptr_at(0); // nof_items-- wewn¹trz
+            brother->fill_nullptr_at(0); // nof_items-- wewnÄ…trz
         }
 
-        // Funkcja scalaj¹ca dwójkê dzieci danego wêz³a na podanych pozycjach
+        // Funkcja scalajÄ…ca dwÃ³jkÄ™ dzieci danego wÄ™zÅ‚a na podanych pozycjach
         void merge_children(ushort pos_left, ushort pos_right) {
             Node* left = children[pos_left];
             Node* right = children[pos_right];
@@ -171,10 +171,10 @@ class BTree {
             delete right;
             this->children[pos_right] = left;
             this->children[pos_left] = nullptr;
-            this->fill_nullptr_at(pos_left); // nof_items-- wewn¹trz
+            this->fill_nullptr_at(pos_left); // nof_items-- wewnÄ…trz
         }
     
-        // Funkcja usuwaj¹ca podany element (przesuwaj¹ca do liœcia i usuwaj¹ca)
+        // Funkcja usuwajÄ…ca podany element (przesuwajÄ…ca do liÅ›cia i usuwajÄ…ca)
         void remove(const Item* const item) {
             ushort pos = 0;
             while(pos < nof_items) {
@@ -193,7 +193,7 @@ class BTree {
                 ushort right = left + 1;
                 if(children[left]->nof_items == MIN_ITEMS) {
                     if(children[right]->nof_items == MIN_ITEMS) {
-                        // Oba maj¹ minimum kluczy
+                        // Oba majÄ… minimum kluczy
                         this->merge_children(left, right);
                         children[left]->remove(item);
                     } else {
@@ -207,7 +207,7 @@ class BTree {
                         std::swap(this->children[left]->items[this->children[left]->nof_items-1], this->items[pos]);
                         this->children[left]->remove(item);
                     } else {
-                        // Oba maj¹ wystarczaj¹c¹ liczbê kluczy
+                        // Oba majÄ… wystarczajÄ…cÄ… liczbÄ™ kluczy
                         ushort left_difference = abs(item->key - this->children[left]->items[this->children[left]->nof_items - 1]->key);
                         ushort right_difference = abs(item->key - this->children[right]->items[0]->key);
                         if(left_difference < right_difference) {
@@ -222,7 +222,7 @@ class BTree {
             }
         }
 
-        // Funkcja usuwaj¹ca element o podanym kluczu
+        // Funkcja usuwajÄ…ca element o podanym kluczu
         const Item* remove(const double key) {
             ushort pos = 0;
             while(pos < nof_items && items[pos]->key < key) pos++;
@@ -237,7 +237,7 @@ class BTree {
                         children[pos]->take_key_from_left(pos);
                     } else if(pos < nof_items && children[pos + 1]->nof_items > MIN_ITEMS) {
                         children[pos]->take_key_from_right(pos);
-                    } else { // Nie da siê po¿yczyæ od braci
+                    } else { // Nie da siÄ™ poÅ¼yczyÄ‡ od braci
                         if(pos == nof_items) {
                             merge_children(pos - 1, pos);
                             pos--;
@@ -250,24 +250,24 @@ class BTree {
             }
         }
 
-        // Funkcja zwracaj¹ca, czy dany wêze³ jest pe³ny
+        // Funkcja zwracajÄ…ca, czy dany wÄ™zeÅ‚ jest peÅ‚ny
         bool is_full() {
             return nof_items == items.size();
         }
 
-        // Funkcja wstawiaj¹ca podany element do wêz³a (albo jednego z jego dzieci) w odpowiednie miejsce
+        // Funkcja wstawiajÄ…ca podany element do wÄ™zÅ‚a (albo jednego z jego dzieci) w odpowiednie miejsce
         void insert(const Item* const item) {
             if(is_full()) {
                 this->split();
                 parent->insert(item);
             } else {
-                if(is_leaf) { // Wêze³ jest liœciem
+                if(is_leaf) { // WÄ™zeÅ‚ jest liÅ›ciem
                     ushort pos = 0;
                     while(items[pos] && items[pos]->key <= item->key) pos++;
                     for(ushort end_pos = nof_items; end_pos > pos; end_pos--) items[end_pos] = items[end_pos - 1];
                     items[pos] = item;
                     nof_items++;
-                } else { // Wêze³ nie jest liœciem
+                } else { // WÄ™zeÅ‚ nie jest liÅ›ciem
                     ushort pos = 0;
                     while(pos < nof_items && items[pos]->key <= item->key) pos++;
                     children[pos]->insert(item);
@@ -275,7 +275,7 @@ class BTree {
             }
         }
 
-        // Funkcja rekurencyjnie wypisuj¹ca wszysktie elementy tego wêz³a i jego dzieci, które mieszcz¹ siê w podanym przedziale w kolejnoœci malej¹cej
+        // Funkcja rekurencyjnie wypisujÄ…ca wszysktie elementy tego wÄ™zÅ‚a i jego dzieci, ktÃ³re mieszczÄ… siÄ™ w podanym przedziale w kolejnoÅ›ci malejÄ…cej
         void print_if_between(const double lower_bound, const double upper_bound) const {
             if(this->is_leaf) {
                 for(int pos = nof_items - 1; pos >= 0; pos--) {
@@ -291,14 +291,14 @@ class BTree {
         }
     };
     
-    Node* root; // WskaŸnik na korzeñ drzewa
+    Node* root; // WskaÅºnik na korzeÅ„ drzewa
 
 public:
 
-    // Konstruktor inicjalizuj¹cy zmienne
+    // Konstruktor inicjalizujÄ…cy zmienne
     BTree() : root(nullptr) {}
 
-    // Funkcja wstawiaj¹ca do drzewa wêze³ o podanym kluczu i wartoœci
+    // Funkcja wstawiajÄ…ca do drzewa wÄ™zeÅ‚ o podanym kluczu i wartoÅ›ci
     void insert(const double key, const std::string value) {
         const Item* new_item = new Item(key, value);
         if(root == nullptr) { // Drzewo jest puste
@@ -308,7 +308,7 @@ public:
         if(root->parent) root = root->parent;
     }
 
-    // Funkcja usuwaj¹ca z drzewa element o podanym kluczu i zwracaj¹ca go
+    // Funkcja usuwajÄ…ca z drzewa element o podanym kluczu i zwracajÄ…ca go
     const Item* remove(const double key) {
         const Item* item = nullptr;
         if(root != nullptr) {
@@ -327,61 +327,61 @@ public:
         return item;
     }
 
-    // Funkcja wypisuj¹ca wszystkie elementy drzewa mieszcz¹ce siê w podanym zakresie
+    // Funkcja wypisujÄ…ca wszystkie elementy drzewa mieszczÄ…ce siÄ™ w podanym zakresie
     void print_between(const double lower_bound, const double upper_bound) const {
         root->print_if_between(lower_bound, upper_bound);
     }
     
 };
 
-// Klasa rankigu osób
+// Klasa rankigu osÃ³b
 class Ranking {
 
     BTree tree; // B-drzewo
 
-    // Dodanie osoby o podanej nazwie i wspó³czynniku niebezpieczeñstwa
+    // Dodanie osoby o podanej nazwie i wspÃ³Å‚czynniku niebezpieczeÅ„stwa
     void add_person(const std::string& name, const double& factor) {
         tree.insert(factor, name);
     }
 
-    // Modyfikacja osoby o podanym wspó³czynniku na nowy wspó³czynnik
+    // Modyfikacja osoby o podanym wspÃ³Å‚czynniku na nowy wspÃ³Å‚czynnik
     void modify(const double old_key, const double new_key) {
         const Item* item = tree.remove(old_key);
         tree.insert(new_key, item->value);
         delete item;
     }
 
-    // Wypisanie wszystkich osób w rankingu mieszcz¹cych siê w podanym zakresie
+    // Wypisanie wszystkich osÃ³b w rankingu mieszczÄ…cych siÄ™ w podanym zakresie
     void print_between(const double lower_bound, const double upper_bound) {
         tree.print_between(lower_bound, upper_bound);
     }
 
 public:
 
-    // Konstruktor przyjmuj¹cy liczbê osób, wczytuj¹cy ich dane i dodaj¹cy do drzewa
+    // Konstruktor przyjmujÄ…cy liczbÄ™ osÃ³b, wczytujÄ…cy ich dane i dodajÄ…cy do drzewa
     Ranking(uint nof_people) {
         for(uint i = 0; i < nof_people; i++) {
             std::string s; // Pseudonim
-            double x; // Wspó³czynnik
+            double x; // WspÃ³Å‚czynnik
             std::cin >> s >> x;
             add_person(s, x);
         }
     }
 
-    // Funkcja przyjmuj¹ca liczbê operacji a nastêpnie je wykonuj¹ca
+    // Funkcja przyjmujÄ…ca liczbÄ™ operacji a nastÄ™pnie je wykonujÄ…ca
     void execute_operations(ushort nof_operations) {
         for(ushort i = 0; i < nof_operations; i++) {
             char op;
             std::cin >> op;
             switch(op) {
-            case 'a': { // Operacja 'a' - dodaj now¹ osobê
+            case 'a': { // Operacja 'a' - dodaj nowÄ… osobÄ™
                 std::string s;
                 double x;
                 std::cin >> s >> x;
                 add_person(s, x);
                 break;
             }
-            case 'm': { // Operacja 'm' - zmieñ wartoœæ wspó³czynnika
+            case 'm': { // Operacja 'm' - zmieÅ„ wartoÅ›Ä‡ wspÃ³Å‚czynnika
                 double x1, x2;
                 std::cin >> x1 >> x2;
                 modify(x1, x2);
@@ -406,12 +406,12 @@ public:
 int main() {
     std::ios::sync_with_stdio(false);
 
-    uint n; // Pocz¹tkowa liczba osób na liœcie
+    uint n; // PoczÄ…tkowa liczba osÃ³b na liÅ›cie
     std::cin >> n;
 
     Ranking ranking(n);
 
-    ushort m; // Iloœæ operacji do wykonania
+    ushort m; // IloÅ›Ä‡ operacji do wykonania
     std::cin >> m;
 
     ranking.execute_operations(m);

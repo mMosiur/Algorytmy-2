@@ -8,32 +8,32 @@ typedef unsigned int uint;
 
 struct Stop;
 
-// Struktura reprezentuj¹ca krawêdŸ miêdzy postojami
+// Struktura reprezentujÄ…ca krawÄ™dÅº miÄ™dzy postojami
 struct Edge {
-    Stop* const stop_a; // WskaŸnik na postój
-    Stop* const stop_b; // WskaŸnik na postój
-    const uint weight;  // Waga krawêdzi
+    Stop* const stop_a; // WskaÅºnik na postÃ³j
+    Stop* const stop_b; // WskaÅºnik na postÃ³j
+    const uint weight;  // Waga krawÄ™dzi
 
-    // Konstruktor krawêdzi inicjalizuj¹cy zmienne
+    // Konstruktor krawÄ™dzi inicjalizujÄ…cy zmienne
     Edge(Stop* a, Stop* b, uint w) : stop_a(a), stop_b(b), weight(w) {}
 };
 
-// Struktura reprezentuj¹ca postój
+// Struktura reprezentujÄ…ca postÃ³j
 struct Stop {
     const ushort number; // Numer postoju
     const uint x, y; // Koordynaty postoju
-    std::vector<Edge*> edges; // Wektor krawêdzi tego wierzcho³ka - postoju
+    std::vector<Edge*> edges; // Wektor krawÄ™dzi tego wierzchoÅ‚ka - postoju
     uint shortest_path;
 
-    // Konstruktor przyjmuj¹cy numer i koordynaty, i inicjalizuj¹cy zmienne
+    // Konstruktor przyjmujÄ…cy numer i koordynaty, i inicjalizujÄ…cy zmienne
     Stop(ushort number, uint x, uint y) : number(number), x(x), y(y), shortest_path(-1) {}
 
-    // Funkcja zwracaj¹ca odleg³oœæ do postoju podanego w argumencie
+    // Funkcja zwracajÄ…ca odlegÅ‚oÅ›Ä‡ do postoju podanego w argumencie
     uint distance_to(const Stop& other) const {
         return std::min(abs((int)this->x - (int)other.x), abs((int)this->y - (int)other.y));
     }
 
-    // Funkcja tworz¹ca krawêdŸ do podanego postoju i zwracaj¹ca na ni¹ wskaŸnik
+    // Funkcja tworzÄ…ca krawÄ™dÅº do podanego postoju i zwracajÄ…a na niÄ… wskaÅºnik
     Edge* connect_to(Stop& other) {
         Edge* edge = new Edge(this, &other, distance_to(other));
         this->edges.push_back(edge);
@@ -42,16 +42,16 @@ struct Stop {
     }
 };
 
-// Klasa reprezentuj¹ca trasê Partycji
+// Klasa reprezentujÄ…ca trasÄ™ Partycji
 class Route {
-    std::vector<Stop> stops; // Wektor postojów
-    std::vector<Edge*> edges; // Wektor wskaŸników na wszystkie krawêdzie
-    Stop* start; // WskaŸnik na postój startowy
-    Stop* destination; // WskaŸnik na postój docelowy
+    std::vector<Stop> stops; // Wektor postojÃ³
+    std::vector<Edge*> edges; // Wektor wskaÅºnikÃ³w na wszystkie krawÄ™dzie
+    Stop* start; // WskaÅºnik na postÃ³j startowy
+    Stop* destination; // WskaÅºnik na postÃ³j docelowy
 
 public:
 
-    // Konstrutkor przyjmuj¹cy liczbê postojów, wczytuj¹cy dane oraz generuj¹cy na ich podstawie graf
+    // Konstrutkor przyjmujÄ…cy liczbÄ™ postojÃ³w, wczytujÄ…cy dane oraz generujÄ…cy na ich podstawie graf
     Route(ushort nof_stops) : start(nullptr), destination(nullptr) {
         std::vector<std::pair<ushort, uint>> x_neighbours;
         std::vector<std::pair<ushort, uint>> y_neighbours;
@@ -84,14 +84,14 @@ public:
         }
     }
 
-    // Destruktor usuwaj¹cy dynamicznie stworzone krawêdzie
+    // Destruktor usuwajÄ…cy dynamicznie stworzone krawÄ™dzie
     ~Route() {
         for(auto& edge : edges) {
             delete edge;
         }
     }
 
-    // Funkcja zwracaj¹ca nakrótsz¹ odleg³oœæ od postoju pocz¹tkowego do docelowego
+    // Funkcja zwracajÄ…ca nakrÃ³tszÄ… odlegÅ‚oÅ›Ä‡ od postoju poczÄ…tkowego do docelowego
     uint shortest_path() const {
         std::priority_queue<std::pair<uint, Stop*>, std::vector<std::pair<uint, Stop*>>, std::greater<std::pair<uint, Stop*>>> queue;
         start->shortest_path = 0;
@@ -120,7 +120,7 @@ public:
 
 int main() {
 
-    ushort n; // Liczba postojów
+    ushort n; // Liczba postojÃ³w
 
     std::cin >> n;
 

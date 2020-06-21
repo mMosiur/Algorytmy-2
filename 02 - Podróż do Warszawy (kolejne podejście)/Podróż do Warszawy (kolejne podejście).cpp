@@ -10,32 +10,32 @@ typedef unsigned int uint;
 
 struct Stop;
 
-// Struktura reprezentuj¹ca krawêdŸ miêdzy postojami
+// Struktura reprezentujÄ…ca krawÄ™dÅº miÄ™dzy postojami
 struct Edge {
-    Stop* const stop_a; // WskaŸnik na postój
-    Stop* const stop_b; // WskaŸnik na postój
-    const uint weight;  // Waga krawêdzi
+    Stop* const stop_a; // WskaÅºnik na postÃ³j
+    Stop* const stop_b; // WskaÅºnik na postÃ³j
+    const uint weight;  // Waga krawÄ™dzi
 
-    // Konstruktor krawêdzi inicjalizuj¹cy zmienne
+    // Konstruktor krawÄ™dzi inicjalizujÄ…cy zmienne
     Edge(Stop* a, Stop* b, uint w) : stop_a(a), stop_b(b), weight(w) {}
 };
 
-// Struktura reprezentuj¹ca postój
+// Struktura reprezentujÄ…ca postÃ³j
 struct Stop {
     const ushort number; // Numer postoju
     const uint x, y; // Koordynaty postoju
-    std::vector<Edge*> edges; // Wektor krawêdzi tego wierzcho³ka - postoju
+    std::vector<Edge*> edges; // Wektor krawÄ™dzi tego wierzchoÅ‚ka - postoju
     uint shortest_path;
 
-    // Konstruktor przyjmuj¹cy numer i koordynaty, i inicjalizuj¹cy zmienne
+    // Konstruktor przyjmujÄ…cy numer i koordynaty, i inicjalizujÄ…cy zmienne
     Stop(ushort number, uint x, uint y) : number(number), x(x), y(y), shortest_path(-1) {}
 
-    // Funkcja zwracaj¹ca odleg³oœæ do postoju podanego w argumencie
+    // Funkcja zwracajÄ…ca odlegÅ‚oÅ›Ä‡ do postoju podanego w argumencie
     uint distance_to(const Stop& other) const {
         return std::min(abs((int)this->x - (int)other.x), abs((int)this->y - (int)other.y));
     }
 
-    // Funkcja tworz¹ca krawêdŸ do podanego postoju i zwracaj¹ca na ni¹ wskaŸnik
+    // Funkcja tworzÄ…ca krawÄ™dÅº do podanego postoju i zwracajÄ…ca na niÄ… wskaÅºnik
     Edge* connect_to(Stop& other) {
         Edge* edge = new Edge(this, &other, distance_to(other));
         this->edges.push_back(edge);
@@ -44,19 +44,19 @@ struct Stop {
     }
 };
 
-// Klasa reprezentuj¹ca kopiec Fibonacciego
+// Klasa reprezentujÄ…ca kopiec Fibonacciego
 class FibonacciHeap {
 
-    // Struktura reprezentuj¹ca wêze³ kopca
+    // Struktura reprezentujÄ…ca wÄ™zeÅ‚ kopca
     struct Node {
-        ushort degree; // Stopieñ wêz³a (wysokoœæ jego drzewa)
-        Node* parent; // WskaŸnik na wêzê³ bêd¹cy rodzicem tego wêz³a
-        std::list<Node*> children; // Lista wskaŸników na dzieci tego wêz³a
+        ushort degree; // StopieÅ„ wÄ™zÅ‚a (wysokoÅ›Ä‡ jego drzewa)
+        Node* parent; // WskaÅºnik na wÄ™zÄ™Å‚ bÄ™dÄ…cy rodzicem tego wÄ™zÅ‚a
+        std::list<Node*> children; // Lista wskaÅºnikÃ³w na dzieci tego wÄ™zÅ‚a
         bool looser; // Flaga utraty jednego dziecka
-        uint key; // Klucz (waga) wêz³a, odlegloœæ postoju od postoju startowego
-        Stop* value; // Wartoœæ przechowywana przez wêze³, wskaŸnik na postój
+        uint key; // Klucz (waga) wÄ™zÅ‚a, odlegloÅ›Ä‡ postoju od postoju startowego
+        Stop* value; // WartoÅ›Ä‡ przechowywana przez wÄ™zeÅ‚, wskaÅºnik na postÃ³j
 
-        // Funkcja dodaj¹ca wskaŸnik na wêze³ w argumencie do listy dziedzi
+        // Funkcja dodajÄ…ca wskaÅºnik na wÄ™zeÅ‚ w argumencie do listy dziedzi
         void add_child(Node* other) {
             children.push_back(other);
             other->parent = this;
@@ -64,16 +64,16 @@ class FibonacciHeap {
             degree++;
         }
 
-        // Konstruktor inicjalizuj¹cy zmienne
+        // Konstruktor inicjalizujÄ…cy zmienne
         Node(uint key, Stop* value) : degree(0), key(key), value(value), parent(nullptr), looser(false) {}
     };
 
-    uint nof_elements; // Liczba elementów w kopcu
+    uint nof_elements; // Liczba elementÃ³w w kopcu
     std::list<Node*> roots; // Lista korzeni drzew kopca
-    std::list<Node*>::iterator minimum; // Iterator kopca wskazuj¹cy element minimalny
-    std::map<Stop*, Node*> stops; // Mapa przechowuj¹ca wskaŸniki na wêz³y dla konkretnych wskaŸników na postoje
+    std::list<Node*>::iterator minimum; // Iterator kopca wskazujÄ…cy element minimalny
+    std::map<Stop*, Node*> stops; // Mapa przechowujÄ…ca wskaÅºniki na wÄ™zÅ‚y dla konkretnych wskaÅºnikÃ³w na postoje
 
-    // Operacja przywrócenia w³aœciwoœci kopca Fibonnaciego
+    // Operacja przywrÃ³cenia wÅ‚aÅ›ciwoÅ›ci kopca Fibonnaciego
     void consolidate() {
         if(nof_elements < 2) return;
         std::vector<Node*> trees(floor(std::log2(nof_elements)) + 2, nullptr);
@@ -103,7 +103,7 @@ class FibonacciHeap {
         }
     }
 
-    // Funkcja odczepiaj¹ca wêzê³ od rodzica i wrzucaj¹ca go do korzeni, powtarzaj¹ca czynnoœæ jeœli trzeba dla ojca
+    // Funkcja odczepiajÄ…ca wÄ™zÄ™Å‚ od rodzica i wrzucajÄ…ca go do korzeni, powtarzajÄ…ca czynnoÅ›Ä‡ jeÅ›li trzeba dla ojca
     void detach_node(Node* node) {
         Node* parent = node->parent;
         if(parent == nullptr) return;
@@ -116,15 +116,15 @@ class FibonacciHeap {
 
 public:
 
-    // Konstruktor inicjalizuj¹cy zmienne
+    // Konstruktor inicjalizujÄ…cy zmienne
     FibonacciHeap() : nof_elements(0) {}
 
-    // Funkcja zwracaj¹ca, czy kopiec jest pusty
+    // Funkcja zwracajÄ…ca, czy kopiec jest pusty
     bool empty() {
         return nof_elements == 0;
     }
 
-    // Funkcja tworz¹ca nowy wêzê³ o podanych atrybutach
+    // Funkcja tworzÄ…ca nowy wÄ™zÄ™Å‚ o podanych atrybutach
     void push(uint key, Stop* value) {
         Node* new_node = new Node(key, value);
         stops[value] = new_node;
@@ -132,14 +132,14 @@ public:
         if(roots.size() == 1 || roots.front()->key < (*minimum)->key) minimum = roots.begin();
         nof_elements++;
     }
-    
-    // Funkcja zwracaj¹ca wskaŸnik na postój w minimalnym wêŸle
+
+    // Funkcja zwracajÄ…ca wskaÅºnik na postÃ³j w minimalnym wÄ™Åºle
     Stop* top() {
         if(empty()) return nullptr;
         return (*minimum)->value;
     }
 
-    // Funkcja usuwaj¹ca minimalny wêzê³ z kopca
+    // Funkcja usuwajÄ…ca minimalny wÄ™zÄ™Å‚ z kopca
     void pop() {
         if(empty()) return;
         Node* min_node = (*minimum);
@@ -154,7 +154,7 @@ public:
         consolidate();
     }
 
-    // Funkcja zmniejszaj¹ca klucz dla danego postoju
+    // Funkcja zmniejszajÄ…ca klucz dla danego postoju
     void decrease_key(uint new_key, Stop* value) {
         Node* node = stops[value];
         Node* parent = node->parent;
@@ -164,16 +164,16 @@ public:
     }
 };
 
-// Klasa reprezentuj¹ca trasê Partycji
+// Klasa reprezentujÄ…ca trasÄ™ Partycji
 class Route {
-    std::vector<Stop> stops; // Wektor postojów
-    std::vector<Edge*> edges; // Wektor wskaŸników na wszystkie krawêdzie
-    Stop* start; // WskaŸnik na postój startowy
-    Stop* destination; // WskaŸnik na postój docelowy
+    std::vector<Stop> stops; // Wektor postojÃ³w
+    std::vector<Edge*> edges; // Wektor wskaÅºnikÃ³w na wszystkie krawÄ™dzie
+    Stop* start; // WskaÅºnik na postÃ³j startowy
+    Stop* destination; // WskaÅºnik na postÃ³j docelowy
 
 public:
 
-    // Konstrutkor przyjmuj¹cy liczbê postojów, wczytuj¹cy dane oraz generuj¹cy na ich podstawie graf
+    // Konstrutkor przyjmujÄ…cy liczbÄ™ postojÃ³w, wczytujÄ…cy dane oraz generujÄ…cy na ich podstawie graf
     Route(ushort nof_stops) : start(nullptr), destination(nullptr) {
         std::vector<std::pair<ushort, uint>> x_neighbours;
         std::vector<std::pair<ushort, uint>> y_neighbours;
@@ -206,14 +206,14 @@ public:
         }
     }
 
-    // Destruktor usuwaj¹cy dynamicznie stworzone krawêdzie
+    // Destruktor usuwajÄ…cy dynamicznie stworzone krawÄ™dzie
     ~Route() {
         for(auto& edge : edges) {
             delete edge;
         }
     }
 
-    // Funkcja zwracaj¹ca nakrótsz¹ odleg³oœæ od postoju pocz¹tkowego do docelowego
+    // Funkcja zwracajÄ…ca nakrÃ³tszÄ… odlegÅ‚oÅ›Ä‡ od postoju poczÄ…tkowego do docelowego
     uint shortest_path() const {
         //std::priority_queue<std::pair<uint, Stop*>, std::vector<std::pair<uint, Stop*>>, std::greater<std::pair<uint, Stop*>>> queue;
         FibonacciHeap queue;
@@ -244,7 +244,7 @@ public:
 
 int main() {
 
-    ushort n; // Liczba postojów
+    ushort n; // Liczba postojÃ³w
 
     std::cin >> n;
 

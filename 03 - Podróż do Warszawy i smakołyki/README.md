@@ -1,21 +1,21 @@
-# Podró¿ do Warszawy i smako³yki
+# PodrÃ³Å¼ do Warszawy i smakoÅ‚yki
 
-Partycja Logiczna przemyœla³a swoje plany i dosz³a do wniosku, ¿e mo¿e obni¿yæ swój stres na niektórych postojach. W koñcu uwielbia jeœæ, a to na pewno obni¿a kortyzol w jej organizmie. Przynajmniej bêdzie tak pomiêdzy postojami. Nasza bohaterka rozbudowa³a opis postojów na siatce o dodatkow¹ wartoœæ v. Ta wartoœæ to liczba, która reprezentuje iloœæ jednostek stresu, jak¹ mo¿e obni¿yæ dany postój.
+Partycja Logiczna przemyÅ›laÅ‚a swoje plany i doszÅ‚a do wniosku, Å¼e moÅ¼e obniÅ¼yÄ‡ swÃ³j stres na niektÃ³rych postojach. W koÅ„cu uwielbia jeÅ›Ä‡, a to na pewno obniÅ¼a kortyzol w jej organizmie. Przynajmniej bÄ™dzie tak pomiÄ™dzy postojami. Nasza bohaterka rozbudowaÅ‚a opis postojÃ³w na siatce o dodatkowÄ… wartoÅ›Ä‡ v. Ta wartoÅ›Ä‡ to liczba, ktÃ³ra reprezentuje iloÅ›Ä‡ jednostek stresu, jakÄ… moÅ¼e obniÅ¼yÄ‡ dany postÃ³j.
 
-Usprawnij poprzedni program tak by bra³ pod uwagê ewentualne przyjemnoœci kulinarne na postojach.
+Usprawnij poprzedni program tak by braÅ‚ pod uwagÄ™ ewentualne przyjemnoÅ›ci kulinarne na postojach.
 
-## Wejœcie
+## WejÅ›cie
 
-W pierwszej linii wejœcia znajduje siê liczba naturalna n, mówi¹ca o iloœci postojów. Nastêpnie program powinien wczytaæ **n sekwencji danych: x y v**, które s¹ wspó³rzêdnymi postojów na naniesionej przez Partycje siatce. Na koniec program powinien wczytaæ dwie liczby naturalne **s** i **d**, które s¹ odpowiednio postojem startowym i postojem docelowym, czyli siedzib¹ instytucji, do której zmierza nasza bohaterka. Ka¿dy postój ma inne wspó³rzêdne.
+W pierwszej linii wejÅ›cia znajduje siÄ™ liczba naturalna n, mÃ³wiÄ…ca o iloÅ›ci postojÃ³w. NastÄ™pnie program powinien wczytaÄ‡ **n sekwencji danych: x y v**, ktÃ³re sÄ… wspÃ³Å‚rzÄ™dnymi postojÃ³w na naniesionej przez Partycje siatce. Na koniec program powinien wczytaÄ‡ dwie liczby naturalne **s** i **d**, ktÃ³re sÄ… odpowiednio postojem startowym i postojem docelowym, czyli siedzibÄ… instytucji, do ktÃ³rej zmierza nasza bohaterka. KaÅ¼dy postÃ³j ma inne wspÃ³Å‚rzÄ™dne.
 
 **0 <= n, v <= 32000**<br>
 **0 <= x, y, s, d <= 2000000000**
 
 
-## Wyjœcie
-Na wyjœciu algorytm powinien wypisaæ jedn¹ liczbê ca³kowit¹, która jest mo¿liwie najmniejsz¹ liczb¹ jednostek stresu, które prze¿yje nasza bohaterka na trasie z punktu **s** do punktu **d**. Mo¿e dojœæ do sytuacji, gdy podró¿owanie na pewnym odcinku bêdzie przynosi³o Partycji ci¹g³e przyjemnoœci. W takiej sytuacji nale¿y zmusiæ nasz¹ bohaterkê by szybko wróci³a na trasê do Warszawy wyœwietlaj¹c komunikat: NIE ZA DOBRZE?
+## WyjÅ›cie
+Na wyjÅ›ciu algorytm powinien wypisaÄ‡ jednÄ… liczbÄ™ caÅ‚kowitÄ…, ktÃ³ra jest moÅ¼liwie najmniejszÄ… liczbÄ… jednostek stresu, ktÃ³re przeÅ¼yje nasza bohaterka na trasie z punktu **s** do punktu **d**. MoÅ¼e dojÅ›Ä‡ do sytuacji, gdy podrÃ³Å¼owanie na pewnym odcinku bÄ™dzie przynosiÅ‚o Partycji ciÄ…gÅ‚e przyjemnoÅ›ci. W takiej sytuacji naleÅ¼y zmusiÄ‡ naszÄ… bohaterkÄ™ by szybko wrÃ³ciÅ‚a na trasÄ™ do Warszawy wyÅ›wietlajÄ…c komunikat: NIE ZA DOBRZE?
 
-### Przyk³adowe dane wejœciowe
+### PrzykÅ‚adowe dane wejÅ›ciowe
 I
 ```
 5
@@ -38,7 +38,7 @@ II
 0 4
 ```
 
-## Przyk³adowe dane wyjœciowe
+## PrzykÅ‚adowe dane wyjÅ›ciowe
 I
 ```
 2

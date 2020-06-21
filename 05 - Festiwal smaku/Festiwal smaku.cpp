@@ -4,32 +4,32 @@
 typedef unsigned int uint;
 const uint NONE = UINT32_MAX;
 
-// Struktura reprezentuj¹ca uczestnika festiwalu
+// Struktura reprezentujÄ…ca uczestnika festiwalu
 struct Participant {
     uint number; // Numer uczestnika
-    std::vector<uint> dish_numbers; // Wektor numerów potraw, które uczestnik zadeklarowa³ chêæ spróbowania
+    std::vector<uint> dish_numbers; // Wektor numerÃ³w potraw, ktÃ³re uczestnik zadeklarowaÅ‚ chÄ™Ä‡ sprÃ³bowania
     uint assigned_dish_number; // Numer dania przypisanego uczestnikowi (NONE dla braku przypisania)
 
-    // Konstruktor inicjalizuj¹cy zmienne
+    // Konstruktor inicjalizujÄ…cy zmienne
     Participant() : number(NONE), assigned_dish_number(NONE) {}
 };
 
-// Struktura reprezentuj¹ca potrawê na festiwalu
+// Struktura reprezentujÄ…ca potrawÄ™ na festiwalu
 struct Dish {
     uint number; // Numer potrawy
-    std::vector<uint> guest_numbers; // Wektor numerów uczestników, którzy zadeklarowi chêæ spróbowania tej potrawy
-    uint meals_left; // Liczba pozosta³ych posi³ków dla danej potrawy
+    std::vector<uint> guest_numbers; // Wektor numerÃ³w uczestnikÃ³w, ktÃ³rzy zadeklarowi chÄ™Ä‡ sprÃ³bowania tej potrawy
+    uint meals_left; // Liczba pozostaÅ‚ych posiÅ‚kÃ³w dla danej potrawy
 
-    // Konstruktor przyjmuj¹cy liczbê posi³ków danej potrawy i inicjalizuj¹cy zmienne
+    // Konstruktor przyjmujÄ…cy liczbÄ™ posiÅ‚kÃ³w danej potrawy i inicjalizujÄ…cy zmienne
     Dish(uint nof_meals) : number(NONE), meals_left(nof_meals) {}
 };
 
-// Klasa reprezentuj¹ca festiwal
+// Klasa reprezentujÄ…ca festiwal
 class Festival {
-    std::vector<Participant> participants; // Wektor uczestników festiwalu
+    std::vector<Participant> participants; // Wektor uczestnikÃ³w festiwalu
     std::vector<Dish> dishes; // Wektor potraw na festiwalu
 
-    // Funkcja zwracaj¹ca, czy znaleziono alternatywn¹ œcie¿kê dla danej potrawy i zapisuj¹ca j¹ w zmiennej z argumentu
+    // Funkcja zwracajÄ…ca, czy znaleziono alternatywnÄ… Å›cieÅ¼kÄ™ dla danej potrawy i zapisujÄ…ca jÄ… w zmiennej z argumentu
     bool find_alternative_path_from(Dish& dish, std::pair<uint, uint>& alternative_path) {
         for(uint guest_number : dish.guest_numbers) {
             Participant& participant = participants[guest_number];
@@ -39,15 +39,15 @@ class Festival {
                 Dish& alternative_dish = dishes[dish_number];
                 if(alternative_dish.meals_left == 0) continue;
                 alternative_path = { guest_number, dish_number };
-                return true; // Znaleziono œcie¿kê alternatywn¹
+                return true; // Znaleziono Å›cieÅ¼kÄ™ alternatywnÄ…
             }
         }
-        return false; // Nie znaleziono œcie¿ki alternatywnej
+        return false; // Nie znaleziono Å›cieÅ¼ki alternatywnej
     }
 
 public:
 
-    // Konstruktor przyjmuj¹cy iloœæ uczestników, potraw i posi³ków, inicjalizuj¹cy zmienne oraz wczytuj¹cy dane z anket
+    // Konstruktor przyjmujÄ…cy iloÅ›Ä‡ uczestnikÃ³w, potraw i posiÅ‚kÃ³w, inicjalizujÄ…cy zmienne oraz wczytujÄ…cy dane z anket
     Festival(uint nof_guests, uint nof_dishes, uint nof_meals) : participants(nof_guests), dishes(nof_dishes, Dish(nof_meals)) {
         for(uint d = 0; d < nof_dishes; d++) dishes[d].number = d;
         for(uint g = 0; g < nof_guests; g++) {
@@ -63,7 +63,7 @@ public:
         }
     }
 
-    // Funkcja zwracaj¹ca maksymaln¹ liczbê zadowolonych uczestników festiwalu
+    // Funkcja zwracajÄ…ca maksymalnÄ… liczbÄ™ zadowolonych uczestnikÃ³w festiwalu
     uint max_content_guests() {
         for(auto& guest : participants) {
             for(uint dish_number : guest.dish_numbers) {
@@ -73,7 +73,7 @@ public:
                 dish.meals_left--;
                 break;
             }
-            if(guest.assigned_dish_number == NONE) { // Jeœli nie uda³o siê po³¹czyæ
+            if(guest.assigned_dish_number == NONE) { // JeÅ›li nie udaÅ‚o siÄ™ poÅ‚Ä…czyÄ‡
                 for(uint dish_number : guest.dish_numbers) {
                     Dish& dish = dishes[dish_number];
                     std::pair<uint, uint> alternative_path;
@@ -88,7 +88,7 @@ public:
                 }
             }
         }
-        // Zliczanie po³¹czonych goœci
+        // Zliczanie poÅ‚Ä…czonych goÅ›ci
         uint nof_content_guests = 0;
         for(auto& guest : participants) {
             if(guest.assigned_dish_number != NONE) nof_content_guests++;
